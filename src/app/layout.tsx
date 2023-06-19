@@ -1,9 +1,5 @@
-import SideBar from '@/components/sidebar/SideBar'
 import './globals.css'
-import Providers from './providers'
-import Arrange from './arrange'
-import { Box } from '@chakra-ui/react'
-import HeadBar from '@/components/headbar/HeadBar'
+import RemainingLayout from './remainingLayout'
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,15 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Providers>
-          <Arrange>
-            <SideBar />
-            <div>
-              <HeadBar />
-              {children}
-            </div>
-          </Arrange>
-        </Providers>
+        <RemainingLayout>{children}</RemainingLayout>
       </body>
     </html>
   )

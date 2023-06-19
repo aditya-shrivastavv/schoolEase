@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Collapser = ({ children }: Props) => {
-  const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure()
+  const { getDisclosureProps, getButtonProps, isOpen } = useDisclosure()
   const [hidden, setHidden] = useState(!isOpen)
 
   return (
@@ -40,3 +40,5 @@ const Collapser = ({ children }: Props) => {
 }
 
 export default Collapser
+
+// {/* <button {...getButtonProps()}>Toggle</button> */}
