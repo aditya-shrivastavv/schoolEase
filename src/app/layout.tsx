@@ -1,5 +1,5 @@
 import './globals.css'
-import RemainingLayout from './remainingLayout'
+import ExtendedLayout from './ExtendedLayout'
 
 export const metadata = {
   title: 'Create Next App',
@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <RemainingLayout>{children}</RemainingLayout>
+        <ExtendedLayout>{children}</ExtendedLayout>
       </body>
     </html>
   )

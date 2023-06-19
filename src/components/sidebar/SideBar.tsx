@@ -4,11 +4,14 @@ import { Box, Center, VStack } from '@chakra-ui/react'
 import React from 'react'
 import Collapser from './Collapser'
 
-type Props = {}
+type Props = {
+  getDisclosureProps: (props?: any) => any
+  isOpen: boolean
+}
 
-const SideBar = (props: Props) => {
+const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
   return (
-    <Collapser>
+    <Collapser getDisclosureProps={getDisclosureProps} isOpen={isOpen}>
       <VStack>
         <Box>
           <Box></Box>
