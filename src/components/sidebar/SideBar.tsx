@@ -143,6 +143,7 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
         </Box>
         <Box w={'full'} my={3}>
           <SettingColorMode />
+          Color mode switch here
         </Box>
       </VStack>
     </Collapser>
