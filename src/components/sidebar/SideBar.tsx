@@ -1,13 +1,37 @@
 'use client'
 
-import { Avatar, Box, Divider, Flex, Text, VStack, Icon } from '@chakra-ui/react'
-import { CodeOutlined, DashboardOutlined, HomeOutlined, TeamOutlined } from '@ant-design/icons'
+import {
+  Avatar,
+  Box,
+  Divider,
+  Flex,
+  Text,
+  VStack,
+  Icon,
+  Card,
+  CardHeader,
+  Heading,
+  CardBody,
+  CardFooter,
+  Button,
+} from '@chakra-ui/react'
+import {
+  CodeOutlined,
+  DashboardOutlined,
+  GithubOutlined,
+  HomeOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+  SettingOutlined,
+  TeamOutlined,
+} from '@ant-design/icons'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { usePathname } from 'next/navigation'
 import Collapser from './Collapser'
 import Logo from '../logo/Logo'
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Props = {
   getDisclosureProps: (props?: any) => any
@@ -85,7 +109,7 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
 
               <Text
                 fontWeight={600}
-                fontSize={'sm'}
+                fontSize={'xs'}
                 letterSpacing={'tight'}
                 p={'6px 25px'}
                 bgColor={'secondary.lighter'}
@@ -113,11 +137,50 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
               </Flex>
             </Box>
           </Box>
-          <Box>Contacts</Box>
+          <Box p={5}>
+            <ContactDeveloper />
+          </Box>
         </Box>
-        <Box w={'full'}>Setting and Color Mode</Box>
+        <Box w={'full'} my={3}>
+          <SettingColorMode />
+        </Box>
       </VStack>
     </Collapser>
+  )
+}
+
+function ContactDeveloper() {
+  return (
+    <Card bgColor={'secondary.lighter'} mt={3}>
+      <CardHeader>
+        <Heading size="sm" textAlign={'center'}>
+          Contact Developer
+        </Heading>
+      </CardHeader>
+      <CardBody>
+        <Image src="/imgs/working-with-laptop.svg" width={200} height={200} alt="developer" />
+      </CardBody>
+      <CardFooter display={'flex'} justify={'space-evenly'}>
+        <Button p={0} variant={'outline'}>
+          <Icon as={GithubOutlined} fontSize={24} />
+        </Button>
+        <Button p={0} variant={'outline'}>
+          <Icon as={LinkedinOutlined} fontSize={24} />
+        </Button>
+        <Button p={0} variant={'outline'}>
+          <Icon as={InstagramOutlined} fontSize={24} />
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}
+
+function SettingColorMode() {
+  return (
+    <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
+      <Icon as={SettingOutlined} />
+      <Text ml={2.5}>Settings</Text>
+    </Flex>
   )
 }
 

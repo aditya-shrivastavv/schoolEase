@@ -9,3 +9,24 @@
 body {
   font-family: 'Public Sans', sans-serif;
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+#sidebar {
+  scrollbar-width: auto;
+  scrollbar-color: #1890ff #91d5ff;
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 0px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+  background: #91d5ff;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background-color: #1890ff;
+  border-radius: 8px;
+  border: 1px solid #ffffff;
+}

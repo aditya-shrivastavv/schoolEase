@@ -17,13 +17,14 @@ const Collapser = ({ children, getDisclosureProps, isOpen }: Props) => {
   return (
     <motion.div
       {...getDisclosureProps()}
+      id="sidebar"
       hidden={hidden}
       initial={false}
       onAnimationStart={() => setHidden(false)}
       onAnimationComplete={() => setHidden(isOpen)}
       animate={{ width: !isOpen ? '260px' : 0 }}
       style={{
-        overflow: 'hidden',
+        overflowX: 'hidden',
         whiteSpace: 'nowrap',
         height: '100vh',
         backgroundColor: sidebarBgColor,
