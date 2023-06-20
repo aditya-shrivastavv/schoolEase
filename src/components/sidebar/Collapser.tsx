@@ -23,7 +23,7 @@ const Collapser = ({ children, getDisclosureProps, isOpen }: Props) => {
       onAnimationComplete={() => setHidden(!isOpen)}
       animate={{ width: isOpen ? '260px' : 0 }}
       style={{
-        overflow: 'auto',
+        overflow: 'hidden',
         whiteSpace: 'nowrap',
         height: '100vh',
         backgroundColor: sidebarBgColor,

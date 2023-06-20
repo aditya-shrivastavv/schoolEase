@@ -1,10 +1,11 @@
 'use client'
 
-import { Avatar, Box, Divider, Flex, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Divider, Flex, Text, VStack, Icon } from '@chakra-ui/react'
 import React from 'react'
 import Collapser from './Collapser'
 import Logo from '../logo/Logo'
 import { HamburgerIcon } from '@chakra-ui/icons'
+import { CodeOutlined, DashboardOutlined, TeamOutlined } from '@ant-design/icons'
 
 type Props = {
   getDisclosureProps: (props?: any) => any
@@ -39,12 +40,40 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
             </Box>
             <Divider my={'10px'} />
             <Box>
-              <Text></Text>
-              <Text fontWeight={600} fontSize={'sm'} letterSpacing={'tight'} m={'9px 25px'}>
+              {/* DASHBOARD */}
+              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
+                <Icon as={DashboardOutlined} />
+                <Text ml={2.5}>Dashboard</Text>
+              </Flex>
+              <Text
+                fontWeight={600}
+                fontSize={'sm'}
+                letterSpacing={'tight'}
+                p={'6px 25px'}
+                bgColor={'secondary.lighter'}
+                my={2}
+              >
                 NAVIGATION
               </Text>
+
+              {/* TEACHERS */}
+              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
+                <Icon as={TeamOutlined} />
+                <Text ml={2.5}>Teachers</Text>
+              </Flex>
+
+              {/* STUDENTS */}
+              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
+                <Icon as={TeamOutlined} />
+                <Text ml={2.5}>Students</Text>
+              </Flex>
+
+              {/* CLASSES */}
+              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
+                <Icon as={CodeOutlined} />
+                <Text ml={2.5}>Classes</Text>
+              </Flex>
             </Box>
-            <Box>Menu Container</Box>
           </Box>
           <Box>Contacts</Box>
         </Box>
