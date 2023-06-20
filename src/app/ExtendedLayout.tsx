@@ -18,7 +18,7 @@ const ExtendedLayout = ({ children }: Props) => {
       <Flex>
         <SideBar getDisclosureProps={getDisclosureProps} isOpen={isOpen} />
         <Box>
-          <HeadBar getButtonProps={getButtonProps} />
+          <HeadBar getButtonProps={getButtonProps} isOpen={isOpen} />
           {children}
         </Box>
       </Flex>
