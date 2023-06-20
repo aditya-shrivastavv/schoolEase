@@ -11,7 +11,7 @@ type Props = {
 }
 
 const Collapser = ({ children, getDisclosureProps, isOpen }: Props) => {
-  const [hidden, setHidden] = useState(!isOpen)
+  const [hidden, setHidden] = useState(isOpen)
   const sidebarBgColor = useColorModeValue('secondary.A100', 'secondary.A300')
 
   return (
@@ -20,8 +20,8 @@ const Collapser = ({ children, getDisclosureProps, isOpen }: Props) => {
       hidden={hidden}
       initial={false}
       onAnimationStart={() => setHidden(false)}
-      onAnimationComplete={() => setHidden(!isOpen)}
-      animate={{ width: isOpen ? '260px' : 0 }}
+      onAnimationComplete={() => setHidden(isOpen)}
+      animate={{ width: !isOpen ? '260px' : 0 }}
       style={{
         overflow: 'hidden',
         whiteSpace: 'nowrap',
