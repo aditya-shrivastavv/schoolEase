@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
+import components from './components/index'
 
 const colors = {
   primary: {
@@ -51,4 +52,4 @@ const colors = {
   },
 }
 
-export const theme = extendTheme({ colors })
+export const theme = extendTheme({ colors, components })
