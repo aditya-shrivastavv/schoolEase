@@ -1,12 +1,13 @@
 'use client'
 
 import { Avatar, Box, Divider, Flex, Text, VStack, Icon } from '@chakra-ui/react'
-import { CodeOutlined, DashboardOutlined, TeamOutlined } from '@ant-design/icons'
+import { CodeOutlined, DashboardOutlined, HomeOutlined, TeamOutlined } from '@ant-design/icons'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { usePathname } from 'next/navigation'
 import Collapser from './Collapser'
 import Logo from '../logo/Logo'
 import React from 'react'
+import Link from 'next/link'
 
 type Props = {
   getDisclosureProps: (props?: any) => any
@@ -43,24 +44,45 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
             </Box>
             <Divider my={'10px'} />
             <Box>
+              {/* HOME */}
+              <Link href="/">
+                <Flex
+                  px={'25px'}
+                  h={'44px'}
+                  align={'center'}
+                  _hover={{ bgColor: 'primary.lighter' }}
+                  bgColor={pathname === '/' ? 'primary.lighter' : ''}
+                  borderRight={pathname === '/' ? '2px solid' : ''}
+                  borderRightColor={'primary.main'}
+                >
+                  <Icon as={HomeOutlined} color={pathname === '/' ? 'primary.main' : ''} />
+                  <Text ml={2.5} color={pathname === '/' ? 'primary.main' : ''}>
+                    Home
+                  </Text>
+                </Flex>
+              </Link>
+
               {/* DASHBOARD */}
-              <Flex
-                px={'25px'}
-                h={'44px'}
-                align={'center'}
-                _hover={{ bgColor: 'primary.lighter' }}
-                bgColor={pathname.startsWith('/dashboard') ? 'primary.lighter' : ''}
-                borderRight={pathname.startsWith('/dashboard') ? '2px solid' : ''}
-                borderRightColor={'primary.main'}
-              >
-                <Icon
-                  as={DashboardOutlined}
-                  color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}
-                />
-                <Text ml={2.5} color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}>
-                  Dashboard
-                </Text>
-              </Flex>
+              <Link href="/dashboard">
+                <Flex
+                  px={'25px'}
+                  h={'44px'}
+                  align={'center'}
+                  _hover={{ bgColor: 'primary.lighter' }}
+                  bgColor={pathname.startsWith('/dashboard') ? 'primary.lighter' : ''}
+                  borderRight={pathname.startsWith('/dashboard') ? '2px solid' : ''}
+                  borderRightColor={'primary.main'}
+                >
+                  <Icon
+                    as={DashboardOutlined}
+                    color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}
+                  />
+                  <Text ml={2.5} color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}>
+                    Dashboard
+                  </Text>
+                </Flex>
+              </Link>
+
               <Text
                 fontWeight={600}
                 fontSize={'sm'}

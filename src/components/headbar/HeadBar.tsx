@@ -1,7 +1,23 @@
 'use client'
 
-import { Box, Button, Flex, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Spacer,
+} from '@chakra-ui/react'
+import {
+  BellOutlined,
+  ClockCircleOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  SettingOutlined,
+} from '@ant-design/icons'
 import React from 'react'
 import { SearchIcon } from '@chakra-ui/icons'
 
@@ -23,6 +39,19 @@ const HeadBar = ({ getButtonProps, isOpen }: Props) => {
           </InputLeftElement>
           <Input type="text" placeholder="Search" w={'30'} />
         </InputGroup>
+        <Spacer />
+        <Button variant="ghost">
+          <Icon as={ClockCircleOutlined} />
+        </Button>
+        <Button variant="ghost">
+          <Icon as={MailOutlined} />
+        </Button>
+        <Button variant="ghost">
+          <Icon as={SettingOutlined} />
+        </Button>
+        <Button variant="ghost">
+          <Icon as={BellOutlined} />
+        </Button>
       </Flex>
     </Box>
   )
