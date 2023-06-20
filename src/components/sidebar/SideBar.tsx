@@ -19,17 +19,17 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
           <Box>
             <Box>
               <Flex m={'25px'}>
-                <Logo hw={28} />
-                <Text fontWeight={600} fontSize={'xl'} ml={2}>
+                <Logo hw={30} />
+                <Text fontWeight={800} fontSize={'xl'} ml={2}>
                   SchoolEase
                 </Text>
               </Flex>
               <Box bgColor={'secondary.lighter'} mb={5} mx={4} py={6} px={5} borderRadius={'md'}>
                 <Flex justify={'space-between'} align={'center'}>
-                  <Flex>
-                    <Avatar src="/imgs/avatar.png" size={'md'} />
-                    <Box ml={2}>
-                      <Text>Admin</Text>
+                  <Flex align={'center'}>
+                    <Avatar src="/imgs/avatar.png" size={'sm'} />
+                    <Box ml={2} fontSize={'sm'}>
+                      <Text mb={'-1'}>Admin</Text>
                       <Text color={'secondary.main'}>Lotus Valley</Text>
                     </Box>
                   </Flex>
@@ -37,8 +37,13 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                 </Flex>
               </Box>
             </Box>
-            <Divider />
-            <Box>Menu Topic</Box>
+            <Divider my={'10px'} />
+            <Box>
+              <Text></Text>
+              <Text fontWeight={600} fontSize={'sm'} letterSpacing={'tight'} m={'9px 25px'}>
+                NAVIGATION
+              </Text>
+            </Box>
             <Box>Menu Container</Box>
           </Box>
           <Box>Contacts</Box>
