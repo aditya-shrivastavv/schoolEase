@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useColorModeValue } from '@chakra-ui/react'
 
 type Props = {
   children: React.ReactNode
@@ -11,6 +12,7 @@ type Props = {
 
 const Collapser = ({ children, getDisclosureProps, isOpen }: Props) => {
   const [hidden, setHidden] = useState(!isOpen)
+  const sidebarBgColor = useColorModeValue('secondary.A100', 'secondary.A300')
 
   return (
     <motion.div
@@ -21,13 +23,12 @@ const Collapser = ({ children, getDisclosureProps, isOpen }: Props) => {
       onAnimationComplete={() => setHidden(!isOpen)}
       animate={{ width: isOpen ? '260px' : 0 }}
       style={{
-        background: 'red',
-        overflow: 'hidden',
+        overflow: 'auto',
         whiteSpace: 'nowrap',
         height: '100vh',
+        backgroundColor: sidebarBgColor,
       }}
     >
-      welcome home
       {children}
     </motion.div>
   )
