@@ -40,16 +40,16 @@ const HeadBar = ({ getButtonProps, isOpen }: Props) => {
           <Input type="text" placeholder="Search" w={'30'} />
         </InputGroup>
         <Spacer />
-        <Button variant="ghost">
+        <Button variant="ghost" p={0}>
           <Icon as={ClockCircleOutlined} />
         </Button>
-        <Button variant="ghost">
+        <Button variant="ghost" p={0}>
           <Icon as={MailOutlined} />
         </Button>
-        <Button variant="ghost">
+        <Button variant="ghost" p={0}>
           <Icon as={SettingOutlined} />
         </Button>
-        <Button variant="ghost">
+        <Button variant="ghost" p={0}>
           <Icon as={BellOutlined} />
         </Button>
       </Flex>
