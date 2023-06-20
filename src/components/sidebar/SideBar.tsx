@@ -1,11 +1,12 @@
 'use client'
 
 import { Avatar, Box, Divider, Flex, Text, VStack, Icon } from '@chakra-ui/react'
-import React from 'react'
+import { CodeOutlined, DashboardOutlined, TeamOutlined } from '@ant-design/icons'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import { usePathname } from 'next/navigation'
 import Collapser from './Collapser'
 import Logo from '../logo/Logo'
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { CodeOutlined, DashboardOutlined, TeamOutlined } from '@ant-design/icons'
+import React from 'react'
 
 type Props = {
   getDisclosureProps: (props?: any) => any
@@ -13,6 +14,8 @@ type Props = {
 }
 
 const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
+  const pathname = usePathname()
+
   return (
     <Collapser getDisclosureProps={getDisclosureProps} isOpen={isOpen}>
       <VStack spacing={24} borderRight={'1px solid'} borderRightColor={'secondary.200'}>
@@ -41,9 +44,22 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
             <Divider my={'10px'} />
             <Box>
               {/* DASHBOARD */}
-              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-                <Icon as={DashboardOutlined} />
-                <Text ml={2.5}>Dashboard</Text>
+              <Flex
+                px={'25px'}
+                h={'44px'}
+                align={'center'}
+                _hover={{ bgColor: 'primary.lighter' }}
+                bgColor={pathname.startsWith('/dashboard') ? 'primary.lighter' : ''}
+                borderRight={pathname.startsWith('/dashboard') ? '2px solid' : ''}
+                borderRightColor={'primary.main'}
+              >
+                <Icon
+                  as={DashboardOutlined}
+                  color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}
+                />
+                <Text ml={2.5} color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}>
+                  Dashboard
+                </Text>
               </Flex>
               <Text
                 fontWeight={600}
