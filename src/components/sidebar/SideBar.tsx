@@ -60,7 +60,7 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                     <Avatar src="/imgs/avatar.png" size={'sm'} />
                     <Box ml={2} fontSize={'sm'}>
                       <Text mb={'-1'}>Admin</Text>
-                      <Text color={'secondary.main'}>Lotus Valley</Text>
+                      <Text variant={'desc'}>Lotus Valley</Text>
                     </Box>
                   </Flex>
                   <IconButton
