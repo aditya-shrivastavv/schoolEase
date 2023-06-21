@@ -17,7 +17,13 @@ const ExtendedLayout = ({ children }: Props) => {
     <Providers>
       <Flex>
         <SideBar getDisclosureProps={getDisclosureProps} isOpen={isOpen} />
-        <Box flexGrow={1}>
+        <Box
+          flexGrow={1}
+          ml={!isOpen ? '260px' : '0px'}
+          style={{
+            transition: 'margin-left 0.2s ease-in-out',
+          }}
+        >
           <HeadBar getButtonProps={getButtonProps} isOpen={isOpen} />
           <Box p={'22px'} bgColor={'secondary.lighter'} minH={'100vh'}>
             {children}
