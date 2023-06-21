@@ -5,6 +5,7 @@ import {
   Button,
   Flex,
   Icon,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
@@ -30,15 +31,12 @@ const HeadBar = ({ getButtonProps, isOpen }: Props) => {
   return (
     <Box as="nav" p={2} borderBottom={'1px solid'} borderBottomColor={'secondary.200'}>
       <Flex align={'center'} gap={2}>
-        <Button
+        <IconButton
           {...getButtonProps()}
-          bgColor={'secondary.200'}
-          borderRadius={'lg'}
-          p={0}
+          icon={!isOpen ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+          aria-label="sidebar-toggle"
           variant={'outline'}
-        >
-          {!isOpen ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
-        </Button>
+        />
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <SearchIcon color="gray.300" />
@@ -46,18 +44,10 @@ const HeadBar = ({ getButtonProps, isOpen }: Props) => {
           <Input type="text" placeholder="Search" w={'30'} />
         </InputGroup>
         <Spacer />
-        <Button variant="ghost" p={0}>
-          <Icon as={ClockCircleOutlined} />
-        </Button>
-        <Button variant="ghost" p={0}>
-          <Icon as={MailOutlined} />
-        </Button>
-        <Button variant="ghost" p={0}>
-          <Icon as={SettingOutlined} />
-        </Button>
-        <Button variant="ghost" p={0}>
-          <Icon as={BellOutlined} />
-        </Button>
+        <IconButton variant="ghost" icon={<ClockCircleOutlined />} aria-label="log" />
+        <IconButton variant="ghost" icon={<MailOutlined />} aria-label="messages" />
+        <IconButton variant="ghost" icon={<SettingOutlined />} aria-label="settings" />
+        <IconButton variant="ghost" icon={<BellOutlined />} aria-label="notifications" />
       </Flex>
     </Box>
   )

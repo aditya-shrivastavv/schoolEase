@@ -14,6 +14,7 @@ import {
   CardBody,
   CardFooter,
   Button,
+  IconButton,
 } from '@chakra-ui/react'
 import {
   CodeOutlined,
@@ -62,7 +63,12 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                       <Text color={'secondary.main'}>Lotus Valley</Text>
                     </Box>
                   </Flex>
-                  <HamburgerIcon />
+                  <IconButton
+                    icon={<HamburgerIcon />}
+                    aria-label="hamburgerIcon"
+                    variant={'ghost'}
+                    size={'sm'}
+                  />
                 </Flex>
               </Box>
             </Box>
