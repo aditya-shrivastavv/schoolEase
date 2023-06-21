@@ -1,2 +1,2 @@
-- [ ] Use IconButton wherever possible.
+- [x] Use IconButton wherever possible.
 - [ ] Add Tooltip wherever necessary.
