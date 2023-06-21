@@ -1,38 +1,36 @@
 'use client'
 
 import {
-  Avatar,
-  Box,
-  Divider,
-  Flex,
-  Text,
-  VStack,
-  Icon,
-  Card,
-  CardHeader,
-  Heading,
-  CardBody,
-  CardFooter,
-  Button,
-  IconButton,
-} from '@chakra-ui/react'
-import {
   CodeOutlined,
   DashboardOutlined,
-  GithubOutlined,
   HomeOutlined,
-  InstagramOutlined,
-  LinkedinOutlined,
   SettingOutlined,
   TeamOutlined,
 } from '@ant-design/icons'
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { usePathname } from 'next/navigation'
-import Collapser from './Collapser'
-import Logo from '../logo/Logo'
-import React from 'react'
-import Link from 'next/link'
+import { AddIcon, HamburgerIcon } from '@chakra-ui/icons'
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Flex,
+  Heading,
+  Icon,
+  IconButton,
+  Text,
+  VStack,
+  ButtonGroup,
+} from '@chakra-ui/react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import Logo from '../logo/Logo'
+import Collapser from './Collapser'
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 
 type Props = {
   getDisclosureProps: (props?: any) => any
@@ -150,7 +148,16 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                 <Icon as={SettingOutlined} />
                 <Text ml={2.5}>Settings</Text>
               </Flex>
-              Color mode switch here
+              <ButtonGroup w={'full'} size="sm" isAttached variant="outline" px={'25px'} h={'44px'}>
+                <Button>
+                  <Icon as={BsFillSunFill} fontSize={'lg'} mr={1} />
+                  Light
+                </Button>
+                <Button>
+                  <Icon as={BsFillMoonFill} fontSize={'lg'} mr={1} />
+                  Dark
+                </Button>
+              </ButtonGroup>
             </Box>
           </Box>
         </Box>
