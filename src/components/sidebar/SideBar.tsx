@@ -31,6 +31,7 @@ import { usePathname } from 'next/navigation'
 import Logo from '../logo/Logo'
 import Collapser from './Collapser'
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
+import Underlay from './Underlay'
 
 type Props = {
   getDisclosureProps: (props?: any) => any
@@ -41,131 +42,160 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
   const pathname = usePathname()
 
   return (
-    <Collapser getDisclosureProps={getDisclosureProps} isOpen={isOpen}>
-      <VStack spacing={24} borderRight={'1px solid'} borderRightColor={'secondary.200'}>
-        <Box w={'full'}>
-          <Box>
+    <Underlay isOpen={isOpen}>
+      <Collapser getDisclosureProps={getDisclosureProps} isOpen={isOpen}>
+        <VStack spacing={24} borderRight={'1px solid'} borderRightColor={'secondary.200'}>
+          <Box w={'full'}>
             <Box>
-              <Flex m={'25px'}>
-                <Logo hw={30} />
-                <Text fontWeight={800} fontSize={'xl'} ml={2}>
-                  SchoolEase
-                </Text>
-              </Flex>
-              <Box bgColor={'secondary.lighter'} mb={5} mx={4} py={6} px={5} borderRadius={'md'}>
-                <Flex justify={'space-between'} align={'center'}>
-                  <Flex align={'center'}>
-                    <Avatar src="/imgs/avatar.png" size={'sm'} />
-                    <Box ml={2} fontSize={'sm'}>
-                      <Text mb={'-1'}>Admin</Text>
-                      <Text variant={'desc'}>Lotus Valley</Text>
-                    </Box>
-                  </Flex>
-                  <IconButton
-                    icon={<HamburgerIcon />}
-                    aria-label="hamburgerIcon"
-                    variant={'ghost'}
-                    size={'sm'}
-                  />
+              <Box>
+                <Flex m={'25px'}>
+                  <Logo hw={30} />
+                  <Text fontWeight={800} fontSize={'xl'} ml={2}>
+                    SchoolEase
+                  </Text>
                 </Flex>
+                <Box bgColor={'secondary.lighter'} mb={5} mx={4} py={6} px={5} borderRadius={'md'}>
+                  <Flex justify={'space-between'} align={'center'}>
+                    <Flex align={'center'}>
+                      <Avatar src="/imgs/avatar.png" size={'sm'} />
+                      <Box ml={2} fontSize={'sm'}>
+                        <Text mb={'-1'}>Admin</Text>
+                        <Text variant={'desc'}>Lotus Valley</Text>
+                      </Box>
+                    </Flex>
+                    <IconButton
+                      icon={<HamburgerIcon />}
+                      aria-label="hamburgerIcon"
+                      variant={'ghost'}
+                      size={'sm'}
+                    />
+                  </Flex>
+                </Box>
+              </Box>
+              <Divider my={'10px'} />
+              <Box>
+                {/* HOME */}
+                <Link href="/">
+                  <Flex
+                    px={'25px'}
+                    h={'44px'}
+                    align={'center'}
+                    _hover={{ bgColor: 'primary.lighter' }}
+                    bgColor={pathname === '/' ? 'primary.lighter' : ''}
+                    borderRight={pathname === '/' ? '2px solid' : ''}
+                    borderRightColor={'primary.main'}
+                  >
+                    <Icon as={HomeOutlined} color={pathname === '/' ? 'primary.main' : ''} />
+                    <Text ml={2.5} color={pathname === '/' ? 'primary.main' : ''}>
+                      Home
+                    </Text>
+                  </Flex>
+                </Link>
+                {/* DASHBOARD */}
+                <Link href="/dashboard">
+                  <Flex
+                    px={'25px'}
+                    h={'44px'}
+                    align={'center'}
+                    _hover={{ bgColor: 'primary.lighter' }}
+                    bgColor={pathname.startsWith('/dashboard') ? 'primary.lighter' : ''}
+                    borderRight={pathname.startsWith('/dashboard') ? '2px solid' : ''}
+                    borderRightColor={'primary.main'}
+                  >
+                    <Icon
+                      as={DashboardOutlined}
+                      color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}
+                    />
+                    <Text ml={2.5} color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}>
+                      Dashboard
+                    </Text>
+                  </Flex>
+                </Link>
+                <Text
+                  fontWeight={'extrabold'}
+                  fontSize={'xs'}
+                  letterSpacing={'tight'}
+                  p={'6px 25px'}
+                  bgColor={'secondary.100'}
+                  my={2}
+                >
+                  NAVIGATION
+                </Text>
+                {/* TEACHERS */}
+                <Flex
+                  px={'25px'}
+                  h={'44px'}
+                  align={'center'}
+                  _hover={{ bgColor: 'primary.lighter' }}
+                >
+                  <Icon as={TeamOutlined} />
+                  <Text ml={2.5}>Teachers</Text>
+                </Flex>
+                {/* STUDENTS */}
+                <Flex
+                  px={'25px'}
+                  h={'44px'}
+                  align={'center'}
+                  _hover={{ bgColor: 'primary.lighter' }}
+                >
+                  <Icon as={TeamOutlined} />
+                  <Text ml={2.5}>Students</Text>
+                </Flex>
+                {/* CLASSES */}
+                <Flex
+                  px={'25px'}
+                  h={'44px'}
+                  align={'center'}
+                  _hover={{ bgColor: 'primary.lighter' }}
+                >
+                  <Icon as={CodeOutlined} />
+                  <Text ml={2.5}>Classes</Text>
+                </Flex>
+                <Text
+                  fontWeight={'extrabold'}
+                  fontSize={'xs'}
+                  letterSpacing={'tight'}
+                  p={'6px 25px'}
+                  bgColor={'secondary.100'}
+                  my={2}
+                >
+                  OPTIONS
+                </Text>
+                <Flex
+                  px={'25px'}
+                  h={'44px'}
+                  align={'center'}
+                  _hover={{ bgColor: 'primary.lighter' }}
+                >
+                  <Icon as={SettingOutlined} />
+                  <Text ml={2.5}>Settings</Text>
+                </Flex>
+                <ButtonGroup
+                  w={'full'}
+                  size="sm"
+                  isAttached
+                  variant="outline"
+                  px={'25px'}
+                  h={'44px'}
+                >
+                  <Button>
+                    <Icon as={BsFillSunFill} fontSize={'lg'} mr={1} />
+                    Light
+                  </Button>
+                  <Button>
+                    <Icon as={BsFillMoonFill} fontSize={'lg'} mr={1} />
+                    Dark
+                  </Button>
+                </ButtonGroup>
               </Box>
             </Box>
-            <Divider my={'10px'} />
-            <Box>
-              {/* HOME */}
-              <Link href="/">
-                <Flex
-                  px={'25px'}
-                  h={'44px'}
-                  align={'center'}
-                  _hover={{ bgColor: 'primary.lighter' }}
-                  bgColor={pathname === '/' ? 'primary.lighter' : ''}
-                  borderRight={pathname === '/' ? '2px solid' : ''}
-                  borderRightColor={'primary.main'}
-                >
-                  <Icon as={HomeOutlined} color={pathname === '/' ? 'primary.main' : ''} />
-                  <Text ml={2.5} color={pathname === '/' ? 'primary.main' : ''}>
-                    Home
-                  </Text>
-                </Flex>
-              </Link>
-              {/* DASHBOARD */}
-              <Link href="/dashboard">
-                <Flex
-                  px={'25px'}
-                  h={'44px'}
-                  align={'center'}
-                  _hover={{ bgColor: 'primary.lighter' }}
-                  bgColor={pathname.startsWith('/dashboard') ? 'primary.lighter' : ''}
-                  borderRight={pathname.startsWith('/dashboard') ? '2px solid' : ''}
-                  borderRightColor={'primary.main'}
-                >
-                  <Icon
-                    as={DashboardOutlined}
-                    color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}
-                  />
-                  <Text ml={2.5} color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}>
-                    Dashboard
-                  </Text>
-                </Flex>
-              </Link>
-              <Text
-                fontWeight={'extrabold'}
-                fontSize={'xs'}
-                letterSpacing={'tight'}
-                p={'6px 25px'}
-                bgColor={'secondary.100'}
-                my={2}
-              >
-                NAVIGATION
-              </Text>
-              {/* TEACHERS */}
-              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-                <Icon as={TeamOutlined} />
-                <Text ml={2.5}>Teachers</Text>
-              </Flex>
-              {/* STUDENTS */}
-              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-                <Icon as={TeamOutlined} />
-                <Text ml={2.5}>Students</Text>
-              </Flex>
-              {/* CLASSES */}
-              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-                <Icon as={CodeOutlined} />
-                <Text ml={2.5}>Classes</Text>
-              </Flex>
-              <Text
-                fontWeight={'extrabold'}
-                fontSize={'xs'}
-                letterSpacing={'tight'}
-                p={'6px 25px'}
-                bgColor={'secondary.100'}
-                my={2}
-              >
-                OPTIONS
-              </Text>
-              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-                <Icon as={SettingOutlined} />
-                <Text ml={2.5}>Settings</Text>
-              </Flex>
-              <ButtonGroup w={'full'} size="sm" isAttached variant="outline" px={'25px'} h={'44px'}>
-                <Button>
-                  <Icon as={BsFillSunFill} fontSize={'lg'} mr={1} />
-                  Light
-                </Button>
-                <Button>
-                  <Icon as={BsFillMoonFill} fontSize={'lg'} mr={1} />
-                  Dark
-                </Button>
-              </ButtonGroup>
-            </Box>
           </Box>
-        </Box>
-        <Box p={5}>
-          <ContactDeveloper />
-        </Box>
-      </VStack>
-    </Collapser>
+          <Box p={5}>
+            <ContactDeveloper />
+          </Box>
+        </VStack>
+      </Collapser>
+    </Underlay>
   )
 }
 

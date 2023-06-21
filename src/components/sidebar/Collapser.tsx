@@ -27,6 +27,9 @@ const Collapser = ({ children, getDisclosureProps, isOpen }: Props) => {
         overflowX: 'hidden',
         whiteSpace: 'nowrap',
         height: '100vh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
         backgroundColor: sidebarBgColor,
       }}
     >
