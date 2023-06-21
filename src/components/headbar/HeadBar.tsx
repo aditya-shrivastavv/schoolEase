@@ -30,7 +30,13 @@ const HeadBar = ({ getButtonProps, isOpen }: Props) => {
   return (
     <Box as="nav" p={2} borderBottom={'1px solid'} borderBottomColor={'secondary.200'}>
       <Flex align={'center'} gap={2}>
-        <Button {...getButtonProps()} bgColor={'secondary.200'} borderRadius={'lg'} p={0}>
+        <Button
+          {...getButtonProps()}
+          bgColor={'secondary.200'}
+          borderRadius={'lg'}
+          p={0}
+          variant={'outline'}
+        >
           {!isOpen ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
         </Button>
         <InputGroup>
