@@ -163,13 +163,13 @@ function ContactDeveloper() {
       </CardBody>
       <CardFooter display={'flex'} justify={'space-evenly'}>
         <Button p={0} variant={'outline'}>
-          <Icon as={GithubOutlined} fontSize={24} />
+          <Image src={'/imgs/github.gif'} width={28} height={28} alt="github" />
         </Button>
         <Button p={0} variant={'outline'}>
-          <Icon as={LinkedinOutlined} fontSize={24} />
+          <Image src={'/imgs/linkedin.svg'} width={28} height={28} alt="github" />
         </Button>
         <Button p={0} variant={'outline'}>
-          <Icon as={InstagramOutlined} fontSize={24} />
+          <Image src={'/imgs/instagram.gif'} width={28} height={28} alt="github" />
         </Button>
       </CardFooter>
     </Card>
