@@ -85,7 +85,6 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                   </Text>
                 </Flex>
               </Link>
-
               {/* DASHBOARD */}
               <Link href="/dashboard">
                 <Flex
@@ -106,44 +105,51 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                   </Text>
                 </Flex>
               </Link>
-
               <Text
-                fontWeight={600}
+                fontWeight={'extrabold'}
                 fontSize={'xs'}
                 letterSpacing={'tight'}
                 p={'6px 25px'}
-                bgColor={'secondary.lighter'}
+                bgColor={'secondary.100'}
                 my={2}
               >
                 NAVIGATION
               </Text>
-
               {/* TEACHERS */}
               <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
                 <Icon as={TeamOutlined} />
                 <Text ml={2.5}>Teachers</Text>
               </Flex>
-
               {/* STUDENTS */}
               <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
                 <Icon as={TeamOutlined} />
                 <Text ml={2.5}>Students</Text>
               </Flex>
-
               {/* CLASSES */}
               <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
                 <Icon as={CodeOutlined} />
                 <Text ml={2.5}>Classes</Text>
               </Flex>
+              <Text
+                fontWeight={'extrabold'}
+                fontSize={'xs'}
+                letterSpacing={'tight'}
+                p={'6px 25px'}
+                bgColor={'secondary.100'}
+                my={2}
+              >
+                OPTIONS
+              </Text>
+              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
+                <Icon as={SettingOutlined} />
+                <Text ml={2.5}>Settings</Text>
+              </Flex>
+              Color mode switch here
             </Box>
           </Box>
-          <Box p={5}>
-            <ContactDeveloper />
-          </Box>
         </Box>
-        <Box w={'full'} my={3}>
-          <SettingColorMode />
-          Color mode switch here
+        <Box p={5}>
+          <ContactDeveloper />
         </Box>
       </VStack>
     </Collapser>
@@ -173,15 +179,6 @@ function ContactDeveloper() {
         </Button>
       </CardFooter>
     </Card>
-  )
-}
-
-function SettingColorMode() {
-  return (
-    <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-      <Icon as={SettingOutlined} />
-      <Text ml={2.5}>Settings</Text>
-    </Flex>
   )
 }
 
