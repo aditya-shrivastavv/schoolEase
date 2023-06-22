@@ -51,9 +51,11 @@ const Dashboard = (props: Props) => {
           <GridItem
             p={'16px'}
             border={'1px solid'}
+            borderRadius={'lg'}
             borderColor={'secondary.200'}
             bgImage={'url("/curves/wave-pink.png")'}
-            bgSize={'cover'}
+            bgSize={'170%'}
+            bgRepeat={'no-repeat'}
             bgPos={'bottom'}
             h={'350px'}
             display={'flex'}
@@ -83,10 +85,12 @@ const Dashboard = (props: Props) => {
           <GridItem
             p={'16px'}
             border={'1px solid'}
+            borderRadius={'lg'}
             borderColor={'secondary.200'}
             bgImage={'url("/curves/wave-green.png")'}
             bgPos={'bottom'}
-            bgSize={'cover'}
+            bgSize={'170%'}
+            bgRepeat={'no-repeat'}
             h={'350px'}
             display={'flex'}
             flexDirection={'column'}
@@ -115,10 +119,12 @@ const Dashboard = (props: Props) => {
           <GridItem
             p={'16px'}
             border={'1px solid'}
+            borderRadius={'lg'}
             borderColor={'secondary.200'}
             bgImage={'url("/curves/wave-yellow.png")'}
             bgPos={'bottom'}
-            bgSize={'cover'}
+            bgSize={'170%'}
+            bgRepeat={'no-repeat'}
             h={'350px'}
             display={'flex'}
             flexDirection={'column'}
@@ -147,10 +153,12 @@ const Dashboard = (props: Props) => {
           <GridItem
             p={'16px'}
             border={'1px solid'}
+            borderRadius={'lg'}
             borderColor={'secondary.200'}
             bgImage={'url("/curves/wave-blue.png")'}
             bgPos={'bottom'}
-            bgSize={'cover'}
+            bgSize={'170%'}
+            bgRepeat={'no-repeat'}
             h={'350px'}
             display={'flex'}
             flexDirection={'column'}
