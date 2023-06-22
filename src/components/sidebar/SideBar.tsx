@@ -148,12 +148,20 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                 <Icon as={SettingOutlined} />
                 <Text ml={2.5}>Settings</Text>
               </Flex>
-              <ButtonGroup w={'full'} size="sm" isAttached variant="outline" px={'25px'} h={'44px'}>
-                <Button>
+              <ButtonGroup
+                w={'full'}
+                size="sm"
+                isAttached
+                variant="outline"
+                px={'25px'}
+                h={'44px'}
+                alignItems={'center'}
+              >
+                <Button flexGrow={1}>
                   <Icon as={BsFillSunFill} fontSize={'lg'} mr={1} />
                   Light
                 </Button>
-                <Button>
+                <Button flexGrow={1}>
                   <Icon as={BsFillMoonFill} fontSize={'lg'} mr={1} />
                   Dark
                 </Button>
