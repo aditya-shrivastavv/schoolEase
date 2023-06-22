@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ArrowForwardIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -48,29 +48,134 @@ const Dashboard = (props: Props) => {
           </Menu>
         </Flex>
         <Grid templateColumns="repeat(4, 1fr)" gap={'22px'}>
-          <GridItem p={'22px'} border={'1px solid'} borderColor={'secondary.200'}>
-            <Flex justify={'space-between'} mb={3}>
-              <Icon
-                as={GiTeacher}
-                fontSize={'5xl'}
-                border={'1px solid'}
-                borderColor={'secondary.light'}
-                p={2}
-                borderRadius={'lg'}
-              />
-              <Image src={'/illustrations/teacher.svg'} width={170} height={170} alt="teacher" />
-            </Flex>
-            <Flex align={'center'} justify={'space-between'} mb={3}>
-              <Text fontSize={'sm'}>Total Teachers :</Text>
-              <Text fontWeight={'extrabold'}>78</Text>
-            </Flex>
-            <Button variant={'solid'} size={'xs'} borderRadius={'full'} w={'full'}>
+          <GridItem
+            p={'16px'}
+            border={'1px solid'}
+            borderColor={'secondary.200'}
+            bgImage={'url("/curves/wave-pink.png")'}
+            bgSize={'cover'}
+            bgPos={'bottom'}
+            h={'350px'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'space-between'}
+          >
+            <Image
+              src={'/illustrations/teacher.svg'}
+              width={1}
+              height={1}
+              alt="teacher illustration"
+              style={{
+                width: '100%',
+              }}
+            />
+            <Button
+              alignSelf={'end'}
+              bgColor={'#fbc3d1'}
+              color={'secondary.800'}
+              size={'sm'}
+              display={'flex'}
+              _hover={{ shadow: 'md' }}
+            >
               Manage Teachers
             </Button>
           </GridItem>
-          <GridItem w="100%" bg="primary.200" />
-          <GridItem w="100%" bg="primary.200" />
-          <GridItem w="100%" bg="primary.200" />
+          <GridItem
+            p={'16px'}
+            border={'1px solid'}
+            borderColor={'secondary.200'}
+            bgImage={'url("/curves/wave-green.png")'}
+            bgPos={'bottom'}
+            bgSize={'cover'}
+            h={'350px'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'space-between'}
+          >
+            <Image
+              src={'/illustrations/student.svg'}
+              width={1}
+              height={1}
+              alt="teacher illustration"
+              style={{
+                width: '100%',
+              }}
+            />
+            <Button
+              alignSelf={'end'}
+              bgColor={'#b9edd8'}
+              color={'secondary.800'}
+              size={'sm'}
+              display={'flex'}
+              _hover={{ shadow: 'md' }}
+            >
+              Manage Students
+            </Button>
+          </GridItem>
+          <GridItem
+            p={'16px'}
+            border={'1px solid'}
+            borderColor={'secondary.200'}
+            bgImage={'url("/curves/wave-yellow.png")'}
+            bgPos={'bottom'}
+            bgSize={'cover'}
+            h={'350px'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'space-between'}
+          >
+            <Image
+              src={'/illustrations/class.svg'}
+              width={1}
+              height={1}
+              alt="teacher illustration"
+              style={{
+                width: '100%',
+              }}
+            />
+            <Button
+              alignSelf={'end'}
+              bgColor={'#feda78'}
+              color={'secondary.800'}
+              size={'sm'}
+              display={'flex'}
+              _hover={{ shadow: 'md' }}
+            >
+              Manage Classes
+            </Button>
+          </GridItem>
+          <GridItem
+            p={'16px'}
+            border={'1px solid'}
+            borderColor={'secondary.200'}
+            bgImage={'url("/curves/wave-blue.png")'}
+            bgPos={'bottom'}
+            bgSize={'cover'}
+            h={'350px'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'space-between'}
+          >
+            <Image
+              src={'/illustrations/exam.svg'}
+              width={1}
+              height={1}
+              alt="teacher illustration"
+              style={{
+                width: '100%',
+              }}
+            />
+            <Button
+              alignSelf={'end'}
+              bgColor={'#c3e7fe'}
+              color={'secondary.800'}
+              size={'sm'}
+              display={'flex'}
+              _hover={{ shadow: 'md' }}
+            >
+              Manage Exams
+            </Button>
+          </GridItem>
         </Grid>
       </Box>
     </Box>
