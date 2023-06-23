@@ -26,7 +26,8 @@ import {
   ButtonGroup,
 } from '@chakra-ui/react'
 import Image from 'next/image'
-import Link from 'next/link'
+import NextLink from 'next/link'
+import { Link } from '@chakra-ui/react'
 import { usePathname } from 'next/navigation'
 import Logo from '../logo/Logo'
 import Collapser from './Collapser'
@@ -73,7 +74,7 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
             <Divider my={'10px'} />
             <Box>
               {/* HOME */}
-              <Link href="/">
+              <Link as={NextLink} href="/" _hover={{ textDecoration: 'none' }}>
                 <Flex
                   px={'25px'}
                   h={'44px'}
@@ -90,21 +91,21 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                 </Flex>
               </Link>
               {/* DASHBOARD */}
-              <Link href="/dashboard">
+              <Link as={NextLink} _hover={{ textDecoration: 'none' }} href="/dashboard">
                 <Flex
                   px={'25px'}
                   h={'44px'}
                   align={'center'}
                   _hover={{ bgColor: 'primary.lighter' }}
-                  bgColor={pathname.startsWith('/dashboard') ? 'primary.lighter' : ''}
-                  borderRight={pathname.startsWith('/dashboard') ? '2px solid' : ''}
+                  bgColor={pathname === '/dashboard' ? 'primary.lighter' : ''}
+                  borderRight={pathname === '/dashboard' ? '2px solid' : ''}
                   borderRightColor={'primary.main'}
                 >
                   <Icon
                     as={DashboardOutlined}
-                    color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}
+                    color={pathname === '/dashboard' ? 'primary.main' : ''}
                   />
-                  <Text ml={2.5} color={pathname.startsWith('/dashboard') ? 'primary.main' : ''}>
+                  <Text ml={2.5} color={pathname === '/dashboard' ? 'primary.main' : ''}>
                     Dashboard
                   </Text>
                 </Flex>
@@ -120,14 +121,42 @@ const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
                 NAVIGATION
               </Text>
               {/* TEACHERS */}
-              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-                <Icon as={TeamOutlined} />
-                <Text ml={2.5}>Teachers</Text>
-              </Flex>
+              <Link as={NextLink} _hover={{ textDecoration: 'none' }} href="/dashboard/teachers">
+                <Flex
+                  px={'25px'}
+                  h={'44px'}
+                  align={'center'}
+                  _hover={{ bgColor: 'primary.lighter' }}
+                  bgColor={pathname === '/dashboard/teachers' ? 'primary.lighter' : ''}
+                  borderRight={pathname === '/dashboard/teachers' ? '2px solid' : ''}
+                  borderRightColor={'primary.main'}
+                >
+                  <Icon
+                    as={TeamOutlined}
+                    color={pathname === '/dashboard/teachers' ? 'primary.main' : ''}
+                  />
+                  <Text ml={2.5} color={pathname === '/dashboard/teachers' ? 'primary.main' : ''}>
+                    Teachers
+                  </Text>
+                </Flex>
+              </Link>
               {/* STUDENTS */}
-              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-                <Icon as={TeamOutlined} />
-                <Text ml={2.5}>Students</Text>
+              <Flex
+                px={'25px'}
+                h={'44px'}
+                align={'center'}
+                _hover={{ bgColor: 'primary.lighter' }}
+                bgColor={pathname === '/dashboard/students' ? 'primary.lighter' : ''}
+                borderRight={pathname === '/dashboard/students' ? '2px solid' : ''}
+                borderRightColor={'primary.main'}
+              >
+                <Icon
+                  as={TeamOutlined}
+                  color={pathname === '/dashboard/students' ? 'primary.main' : ''}
+                />
+                <Text ml={2.5} color={pathname === '/dashboard/students' ? 'primary.main' : ''}>
+                  Students
+                </Text>
               </Flex>
               {/* CLASSES */}
               <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
