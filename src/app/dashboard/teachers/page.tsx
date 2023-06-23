@@ -1,11 +1,12 @@
 'use client'
 
 import React from 'react'
+import DataTable from './dTable'
 
 type Props = {}
 
 const TeachersPage = (props: Props) => {
-  return <div>Teachers Page</div>
+  return <DataTable />
 }
 
 export default TeachersPage
