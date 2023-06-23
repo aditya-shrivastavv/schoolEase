@@ -38,9 +38,9 @@ const rows: GridRowsProp = [
   },
 ]
 const columns: GridColDef[] = [
-  { field: 'name', headerName: 'Name', width: 150, headerClassName: 'dTableHeader' },
-  { field: 'age', headerName: 'Age', width: 150, headerClassName: 'dTableHeader' },
-  { field: 'address', headerName: 'Address', width: 150, headerClassName: 'dTableHeader' },
+  { field: 'name', headerName: 'Name', width: 200 },
+  { field: 'age', headerName: 'Age', width: 70 },
+  { field: 'address', headerName: 'Address', width: 200 },
 ]
 
 export default function DataTable() {
