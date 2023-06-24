@@ -18,10 +18,10 @@ const ExtendedLayout = ({ children }: Props) => {
       <Flex>
         <SideBar getDisclosureProps={getDisclosureProps} isOpen={isOpen} />
         <Box
-          flexGrow={1}
-          ml={!isOpen ? '260px' : '0px'}
+          width={'100%'}
+          pl={!isOpen ? '260px' : '0px'}
           style={{
-            transition: 'margin-left 0.2s ease-in-out',
+            transition: 'padding-left 0.2s ease-in-out',
           }}
         >
           <HeadBar getButtonProps={getButtonProps} isOpen={isOpen} />
