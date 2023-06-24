@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Aditya-Shrivastava-s-workspace-dnrfbn.us-east-1.xata.sh/db/school-ease",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
