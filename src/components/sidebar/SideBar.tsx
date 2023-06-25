@@ -116,21 +116,21 @@ const SideBar = () => {
                 NAVIGATION
               </Text>
               {/* TEACHERS */}
-              <Link as={NextLink} _hover={{ textDecoration: 'none' }} href="/dashboard/teachers">
+              <Link as={NextLink} _hover={{ textDecoration: 'none' }} href="/manage/teachers">
                 <Flex
                   px={'25px'}
                   h={'44px'}
                   align={'center'}
                   _hover={{ bgColor: 'primary.lighter' }}
-                  bgColor={pathname === '/dashboard/teachers' ? 'primary.lighter' : ''}
-                  borderRight={pathname === '/dashboard/teachers' ? '2px solid' : ''}
+                  bgColor={pathname === '/manage/teachers' ? 'primary.lighter' : ''}
+                  borderRight={pathname === '/manage/teachers' ? '2px solid' : ''}
                   borderRightColor={'primary.main'}
                 >
                   <Icon
                     as={TeamOutlined}
-                    color={pathname === '/dashboard/teachers' ? 'primary.main' : ''}
+                    color={pathname === '/manage/teachers' ? 'primary.main' : ''}
                   />
-                  <Text ml={2.5} color={pathname === '/dashboard/teachers' ? 'primary.main' : ''}>
+                  <Text ml={2.5} color={pathname === '/manage/teachers' ? 'primary.main' : ''}>
                     Teachers
                   </Text>
                 </Flex>
@@ -141,15 +141,15 @@ const SideBar = () => {
                 h={'44px'}
                 align={'center'}
                 _hover={{ bgColor: 'primary.lighter' }}
-                bgColor={pathname === '/dashboard/students' ? 'primary.lighter' : ''}
-                borderRight={pathname === '/dashboard/students' ? '2px solid' : ''}
+                bgColor={pathname === '/manage/students' ? 'primary.lighter' : ''}
+                borderRight={pathname === '/manage/students' ? '2px solid' : ''}
                 borderRightColor={'primary.main'}
               >
                 <Icon
                   as={TeamOutlined}
-                  color={pathname === '/dashboard/students' ? 'primary.main' : ''}
+                  color={pathname === '/manage/students' ? 'primary.main' : ''}
                 />
-                <Text ml={2.5} color={pathname === '/dashboard/students' ? 'primary.main' : ''}>
+                <Text ml={2.5} color={pathname === '/manage/students' ? 'primary.main' : ''}>
                   Students
                 </Text>
               </Flex>
