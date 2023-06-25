@@ -33,16 +33,11 @@ import Logo from '../logo/Logo'
 import Collapser from './Collapser'
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 
-type Props = {
-  getDisclosureProps: (props?: any) => any
-  isOpen: boolean
-}
-
-const SideBar = ({ getDisclosureProps, isOpen }: Props) => {
+const SideBar = () => {
   const pathname = usePathname()
 
   return (
-    <Collapser getDisclosureProps={getDisclosureProps} isOpen={isOpen}>
+    <Collapser>
       <VStack spacing={24} borderRight={'1px solid'} borderRightColor={'secondary.200'}>
         <Box w={'full'}>
           <Box>

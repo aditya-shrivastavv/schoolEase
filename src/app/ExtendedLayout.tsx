@@ -1,36 +1,35 @@
 'use client'
 
 import React from 'react'
-import Providers from './providers'
 import SideBar from '@/components/sidebar/SideBar'
 import HeadBar from '@/components/headbar/HeadBar'
-import { Box, Flex, useDisclosure } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
+import { useRecoilValue } from 'recoil'
+import { sidebarAtom } from '@/atom/sidebarAtom'
 
 type Props = {
   children: React.ReactNode
 }
 
 const ExtendedLayout = ({ children }: Props) => {
-  const { getDisclosureProps, getButtonProps, isOpen } = useDisclosure()
+  const sidebarState = useRecoilValue(sidebarAtom)
 
   return (
-    <Providers>
-      <Flex>
-        <SideBar getDisclosureProps={getDisclosureProps} isOpen={isOpen} />
-        <Box
-          width={'100%'}
-          pl={!isOpen ? '260px' : '0px'}
-          style={{
-            transition: 'padding-left 0.2s ease-in-out',
-          }}
-        >
-          <HeadBar getButtonProps={getButtonProps} isOpen={isOpen} />
-          <Box p={'22px'} bgColor={'secondary.lighter'} minH={'100vh'}>
-            {children}
-          </Box>
+    <Flex>
+      <SideBar />
+      <Box
+        width={'100%'}
+        pl={sidebarState.open ? '260px' : '0px'}
+        style={{
+          transition: 'padding-left 0.2s ease-in-out',
+        }}
+      >
+        <HeadBar />
+        <Box p={'22px'} bgColor={'secondary.lighter'} minH={'100vh'}>
+          {children}
         </Box>
-      </Flex>
-    </Providers>
+      </Box>
+    </Flex>
   )
 }
 

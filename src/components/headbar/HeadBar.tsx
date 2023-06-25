@@ -2,9 +2,7 @@
 
 import {
   Box,
-  Button,
   Flex,
-  Icon,
   IconButton,
   Input,
   InputGroup,
@@ -21,21 +19,20 @@ import {
 } from '@ant-design/icons'
 import React from 'react'
 import { SearchIcon } from '@chakra-ui/icons'
+import { useRecoilState } from 'recoil'
+import { sidebarAtom } from '@/atom/sidebarAtom'
 
-type Props = {
-  getButtonProps: (props?: any) => any
-  isOpen: boolean
-}
+const HeadBar = () => {
+  const [sidebarState, setSidebarState] = useRecoilState(sidebarAtom)
 
-const HeadBar = ({ getButtonProps, isOpen }: Props) => {
   return (
     <Box as="nav" p={2} borderBottom={'1px solid'} borderBottomColor={'secondary.200'}>
       <Flex align={'center'} gap={2}>
         <IconButton
-          {...getButtonProps()}
-          icon={!isOpen ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+          icon={sidebarState.open ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
           aria-label="sidebar-toggle"
           variant={'outline'}
+          onClick={() => setSidebarState((prev) => ({ ...prev, open: !prev.open }))}
         />
         <InputGroup>
           <InputLeftElement pointerEvents="none">

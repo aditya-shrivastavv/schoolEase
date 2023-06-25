@@ -1,28 +1,24 @@
 'use client'
 
-import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useColorModeValue } from '@chakra-ui/react'
+import { useRecoilValue } from 'recoil'
+import { sidebarAtom } from '@/atom/sidebarAtom'
 
 type Props = {
   children: React.ReactNode
-  getDisclosureProps: (props?: any) => any
-  isOpen: boolean
 }
 
-const Collapser = ({ children, getDisclosureProps, isOpen }: Props) => {
-  const [hidden, setHidden] = useState(isOpen)
+const Collapser = ({ children }: Props) => {
   const sidebarBgColor = useColorModeValue('secondary.A100', 'secondary.A300')
+  const sidebarState = useRecoilValue(sidebarAtom)
 
   return (
     <motion.div
-      {...getDisclosureProps()}
       id="sidebar"
-      hidden={hidden}
+      hidden={!sidebarState.open}
       initial={false}
-      onAnimationStart={() => setHidden(false)}
-      onAnimationComplete={() => setHidden(isOpen)}
-      animate={{ width: !isOpen ? '260px' : 0 }}
+      animate={{ width: sidebarState.open ? '260px' : 0 }}
       style={{
         overflowX: 'hidden',
         whiteSpace: 'nowrap',
