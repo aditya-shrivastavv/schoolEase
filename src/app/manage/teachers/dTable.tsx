@@ -14,7 +14,8 @@ import {
 import { ThemeProvider } from '@mui/material'
 import { MuiTheme } from '@/theme/mui'
 import { sampledata } from '@/db/sample'
-import { Tag, TagLabel } from '@chakra-ui/react'
+import { Button, Tag, TagLabel } from '@chakra-ui/react'
+import { DeleteIcon } from '@chakra-ui/icons'
 
 const columns: GridColDef[] = [
   {
@@ -70,12 +71,26 @@ export default function DataTable() {
 }
 
 function CustomToolbar() {
+  function handleDeleteTeacher() {
+    console.log('Delete Teacher.')
+  }
+
   return (
     <GridToolbarContainer sx={{ gap: 1, mb: 1 }}>
       <GridToolbarDensitySelector />
       <GridToolbarColumnsButton />
       <GridToolbarFilterButton />
       <GridToolbarExport />
+      <Button
+        leftIcon={<DeleteIcon boxSize={'16px'} />}
+        variant={'ghost'}
+        color={'red.500'}
+        borderRadius={'md'}
+        p={'4px 5px'}
+        _hover={{ color: 'red.400', bgColor: 'red.50' }}
+      >
+        DELETE
+      </Button>
     </GridToolbarContainer>
   )
 }

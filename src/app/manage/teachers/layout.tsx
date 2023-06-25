@@ -10,12 +10,9 @@ type Props = {
 const TeachersLayout = ({ children }: Props) => {
   return (
     <Box>
-      <Divider />
-      <Flex justify={'space-between'} align={'center'} my={5}>
+      <Flex justify={'space-between'} align={'center'} mt={3} mb={5}>
         <Box>
-          <Heading size="lg" fontWeight={'light'}>
-            Teachers Section
-          </Heading>
+          <Heading size="lg">Teachers Section</Heading>
         </Box>
         <Button variant={'outline'} rounded={'full'}>
           Add Teacher
