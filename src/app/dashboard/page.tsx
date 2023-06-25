@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowForwardIcon, ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -15,10 +15,8 @@ import {
   GridItem,
   Icon,
 } from '@chakra-ui/react'
-import format from 'date-fns/format'
 import Image from 'next/image'
 import React from 'react'
-import { GiTeacher } from 'react-icons/gi'
 
 type Props = {}
 
