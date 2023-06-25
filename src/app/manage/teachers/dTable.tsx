@@ -14,14 +14,35 @@ import {
 import { ThemeProvider } from '@mui/material'
 import { MuiTheme } from '@/theme/mui'
 import { sampledata } from '@/db/sample'
-import { Button, Tag, TagLabel } from '@chakra-ui/react'
-import { DeleteIcon } from '@chakra-ui/icons'
+import { Button, Tag, TagLabel, Flex, Text, IconButton } from '@chakra-ui/react'
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
 const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Name',
     minWidth: 230,
+    renderCell: (params: GridRenderCellParams) => {
+      return (
+        <Flex justify={'space-between'} align={'center'} w={'100%'} className="parent">
+          <Text>{params.value}</Text>
+          <IconButton
+            icon={<EditIcon />}
+            display={'none'}
+            bgColor={'grey.200'}
+            outline={'0.5px solid grey'}
+            p={'1px 4px'}
+            borderRadius={'sm'}
+            aria-label="edit profile btn"
+            css={{
+              '.parent:hover &': {
+                display: 'block',
+              },
+            }}
+          />
+        </Flex>
+      )
+    },
   },
   { field: 'email', headerName: 'Email', minWidth: 250 },
   { field: 'dob', headerName: 'Date of Birth', minWidth: 220 },
@@ -32,16 +53,14 @@ const columns: GridColDef[] = [
   },
   {
     field: 'classes',
-    type: 'ReactNode',
     headerName: 'Assigned Classes',
     minWidth: 230,
-    renderCell: (params: GridRenderCellParams) => {
-      return params.value.map((item: string) => (
+    renderCell: (params: GridRenderCellParams) =>
+      params.value.map((item: string) => (
         <Tag key={item} size={'sm'} bgColor={'green.300'} px={2} mr={2} borderRadius={'full'}>
           <TagLabel>{item}</TagLabel>
         </Tag>
-      ))
-    },
+      )),
   },
 ]
 
@@ -54,16 +73,21 @@ export default function DataTable() {
         <DataGrid
           rows={rows}
           columns={columns}
-          slots={{
-            toolbar: CustomToolbar,
+          density="compact"
+          checkboxSelection
+          autoHeight
+          onRowSelectionModelChange={(ids) => {
+            const selectedIDs = new Set(ids)
+            const selectedRows = rows.filter((row) => selectedIDs.has(row.id))
+            console.log(selectedRows)
           }}
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } },
           }}
           pageSizeOptions={[10, 25, 50, 100]}
-          density="compact"
-          checkboxSelection
-          autoHeight
+          slots={{
+            toolbar: CustomToolbar,
+          }}
         />
       </ThemeProvider>
     </div>
