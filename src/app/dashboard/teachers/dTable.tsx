@@ -9,10 +9,12 @@ import {
   GridToolbarColumnsButton,
   GridToolbarFilterButton,
   GridToolbarExport,
+  GridRenderCellParams,
 } from '@mui/x-data-grid'
 import { ThemeProvider } from '@mui/material'
 import { MuiTheme } from '@/theme/mui'
 import { sampledata } from '@/db/sample'
+import { Tag, TagLabel } from '@chakra-ui/react'
 
 const columns: GridColDef[] = [
   {
@@ -29,8 +31,16 @@ const columns: GridColDef[] = [
   },
   {
     field: 'classes',
+    type: 'ReactNode',
     headerName: 'Assigned Classes',
     minWidth: 230,
+    renderCell: (params: GridRenderCellParams) => {
+      return params.value.map((item: string) => (
+        <Tag key={item} size={'sm'} bgColor={'green.300'} px={2} mr={2} borderRadius={'full'}>
+          <TagLabel>{item}</TagLabel>
+        </Tag>
+      ))
+    },
   },
 ]
 
