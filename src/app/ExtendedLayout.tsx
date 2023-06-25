@@ -25,7 +25,7 @@ const ExtendedLayout = ({ children }: Props) => {
         }}
       >
         <HeadBar />
-        <Box p={'22px'} bgColor={'secondary.lighter'} minH={'100vh'}>
+        <Box p={'22px'} pt={'78px'} bgColor={'secondary.lighter'} minH={'100vh'}>
           {children}
         </Box>
       </Box>

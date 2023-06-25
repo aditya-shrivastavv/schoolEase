@@ -26,7 +26,19 @@ const HeadBar = () => {
   const [sidebarState, setSidebarState] = useRecoilState(sidebarAtom)
 
   return (
-    <Box as="nav" p={2} borderBottom={'1px solid'} borderBottomColor={'secondary.200'}>
+    <Box
+      as="nav"
+      p={2}
+      position={'fixed'}
+      top={0}
+      left={sidebarState.open ? '260px' : '0px'}
+      transition={'left 0.2s ease-in-out'}
+      right={0}
+      bgColor={'secondary.A100'}
+      zIndex={100}
+      borderBottom={'1px solid'}
+      borderBottomColor={'secondary.200'}
+    >
       <Flex align={'center'} gap={2}>
         <IconButton
           icon={sidebarState.open ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
