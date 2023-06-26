@@ -2,7 +2,7 @@ import { ComponentStyleConfig } from '@chakra-ui/react'
 
 export const Button: ComponentStyleConfig = {
   variants: {
-    solid: {
+    primary: {
       bg: 'primary.main',
       color: 'secondary.100',
       _hover: {
