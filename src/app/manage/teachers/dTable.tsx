@@ -26,11 +26,11 @@ export default function DataTable() {
     {
       field: 'name',
       headerName: 'Name',
-      minWidth: 230,
+      minWidth: 240,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Flex justify={'space-between'} align={'center'} w={'100%'} className="parent">
-            <Text>{params.value}</Text>
+            <Text textTransform={'capitalize'}>{params.value}</Text>
             <IconButton
               icon={<EditIcon />}
               display={'none'}
@@ -54,17 +54,11 @@ export default function DataTable() {
         )
       },
     },
-    { field: 'email', headerName: 'Email', minWidth: 250 },
-    { field: 'dob', headerName: 'Date of Birth', minWidth: 220 },
-    {
-      field: 'phone',
-      headerName: 'Contact Number',
-      minWidth: 150,
-    },
+    { field: 'email', headerName: 'Email', minWidth: 260 },
     {
       field: 'classes',
-      headerName: 'Assigned Classes',
-      minWidth: 230,
+      headerName: 'Classes',
+      minWidth: 320,
       renderCell: (params: GridRenderCellParams) =>
         params.value.map((item: string) => (
           <Tag key={item} size={'sm'} bgColor={'green.300'} px={2} mr={2} borderRadius={'full'}>
