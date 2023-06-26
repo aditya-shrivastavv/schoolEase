@@ -29,11 +29,14 @@ const columns: GridColDef[] = [
           <IconButton
             icon={<EditIcon />}
             display={'none'}
-            bgColor={'grey.200'}
-            outline={'0.5px solid grey'}
+            bgColor={'gray.300'}
             p={'1px 4px'}
-            borderRadius={'sm'}
+            borderRadius={'md'}
             aria-label="edit profile btn"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation()
+              console.log('Edit Teacher.')
+            }}
             css={{
               '.parent:hover &': {
                 display: 'block',
