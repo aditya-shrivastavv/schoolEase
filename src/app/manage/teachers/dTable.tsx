@@ -4,7 +4,7 @@ import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
 import { sampledata } from '@/db/sample'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { Button, Tag, TagLabel } from '@chakra-ui/react'
+import { Button, Tag, TagLabel, useToast } from '@chakra-ui/react'
 import { ThemeProvider } from '@mui/material'
 import {
   DataGrid,
@@ -72,9 +72,22 @@ export default function DataTable() {
 
 function CustomToolbar() {
   const openEditModal = useSetRecoilState(editTeacherModalAtom)
+  const toast = useToast()
 
   function handleEditModalOpen() {
-    selectedRows.length === 1 && openEditModal({ open: true })
+    if (selectedRows.length !== 1) {
+      toast({
+        title: 'Invalid Operation!',
+        description: 'Please select a single row to edit.',
+        status: 'warning',
+        duration: 4000,
+        position: 'top-right',
+        variant: 'top-accent',
+        isClosable: true,
+      })
+    } else {
+      openEditModal({ open: true })
+    }
   }
 
   return (
