@@ -7,6 +7,7 @@ import { Box, Flex } from '@chakra-ui/react'
 import { useRecoilValue } from 'recoil'
 import { sidebarAtom } from '@/atom/sidebarAtom'
 import EditTeacherModal from '@/components/modal/editTeacher'
+import CreateTeacherModal from '@/components/modal/createTeacher'
 
 type Props = {
   children: React.ReactNode
@@ -17,7 +18,11 @@ const ExtendedLayout = ({ children }: Props) => {
 
   return (
     <>
-      <EditTeacherModal />
+      {/* MODALS */}
+      <>
+        <CreateTeacherModal />
+        <EditTeacherModal />
+      </>
       <Flex>
         <SideBar />
         <Box
