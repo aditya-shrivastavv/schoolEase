@@ -120,3 +120,5 @@ export const sampledata = [
     classes: ['whether', 'but'],
   },
 ]
+
+export type SampleDataType = typeof sampledata

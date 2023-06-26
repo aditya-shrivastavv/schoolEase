@@ -1,7 +1,7 @@
 'use client'
 
 import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
-import { sampledata } from '@/db/sample'
+import { SampleDataType, sampledata } from '@/db/sample'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Button, Tag, TagLabel, useToast } from '@chakra-ui/react'
@@ -18,7 +18,7 @@ import {
 } from '@mui/x-data-grid'
 import { useSetRecoilState } from 'recoil'
 
-let selectedRows: typeof sampledata = []
+let selectedRows: SampleDataType = []
 
 export default function DataTable() {
   const columns: GridColDef[] = [
@@ -71,7 +71,7 @@ export default function DataTable() {
 }
 
 function CustomToolbar() {
-  const openEditModal = useSetRecoilState(editTeacherModalAtom)
+  const teacherEditModal = useSetRecoilState(editTeacherModalAtom)
   const toast = useToast()
 
   function handleEditModalOpen() {
@@ -86,7 +86,7 @@ function CustomToolbar() {
         isClosable: true,
       })
     } else {
-      openEditModal({ open: true })
+      teacherEditModal({ open: true, teacherData: selectedRows[0] })
     }
   }
 

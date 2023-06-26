@@ -3,6 +3,7 @@
 import React from 'react'
 import {
   Button,
+  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -16,37 +17,85 @@ import {
 } from '@chakra-ui/react'
 import { useRecoilState } from 'recoil'
 import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
+import { useForm } from 'react-hook-form'
 
 const EditTeacherModal = () => {
-  const initialRef = React.useRef(null)
-  const [{ open }, setIsOpen] = useRecoilState(editTeacherModalAtom)
+  const [{ open, teacherData }, setIsOpen] = useRecoilState(editTeacherModalAtom)
+  const { register, handleSubmit, reset, formState } = useForm()
+  function onSubmit(data: any) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(console.log(data))
+      }, 2000)
+    })
+  }
 
   return (
     <>
-      <Modal initialFocusRef={initialRef} isOpen={open} onClose={() => setIsOpen({ open: false })}>
+      <Modal isOpen={open} size={'xl'} onClose={() => setIsOpen({ open: false })}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input ref={initialRef} placeholder="First name" />
-            </FormControl>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ModalContent>
+            <ModalHeader>Edit Teacher Detail</ModalHeader>
+            <ModalCloseButton onClick={() => reset()} />
+            <ModalBody mb={6}>
+              <Flex gap={3} align={'center'}>
+                {/* FIRST NAME */}
+                <FormControl isRequired flexBasis={'50%'}>
+                  <FormLabel>First name</FormLabel>
+                  <Input {...register('firstName')} variant={'filled'} placeholder="First name" />
+                </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" />
-            </FormControl>
-          </ModalBody>
+                {/* LAST NAME */}
+                <FormControl flexBasis={'50%'}>
+                  <FormLabel>Last name</FormLabel>
+                  <Input {...register('lastName')} variant={'filled'} placeholder="Last name" />
+                </FormControl>
+              </Flex>
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save
-            </Button>
-            <Button onClick={() => setIsOpen({ open: false })}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
+              {/* EMAIL */}
+              <FormControl isRequired mt={4}>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  {...register('email')}
+                  type="email"
+                  variant={'filled'}
+                  placeholder="Enter email"
+                />
+              </FormControl>
+
+              {/* CLASSES */}
+              <FormControl mt={4}>
+                <FormLabel>Assigned Classes</FormLabel>
+                <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" />
+              </FormControl>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                px={6}
+                borderRadius={'full'}
+                type="submit"
+                isDisabled={!formState.isDirty}
+                isLoading={formState.isSubmitting}
+              >
+                Commit Changes
+              </Button>
+              <Button
+                onClick={() => {
+                  reset()
+                  setIsOpen((prev) => ({ ...prev, open: false }))
+                }}
+                px={6}
+                borderRadius={'full'}
+              >
+                Cancel
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </form>
       </Modal>
     </>
   )
