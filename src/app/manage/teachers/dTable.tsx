@@ -1,58 +1,31 @@
 'use client'
 
-import * as React from 'react'
+import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
+import { sampledata } from '@/db/sample'
+import { MuiTheme } from '@/theme/mui'
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { Button, Tag, TagLabel } from '@chakra-ui/react'
+import { ThemeProvider } from '@mui/material'
 import {
   DataGrid,
   GridColDef,
+  GridRenderCellParams,
+  GridToolbarColumnsButton,
   GridToolbarContainer,
   GridToolbarDensitySelector,
-  GridToolbarColumnsButton,
-  GridToolbarFilterButton,
   GridToolbarExport,
-  GridRenderCellParams,
+  GridToolbarFilterButton,
 } from '@mui/x-data-grid'
-import { ThemeProvider } from '@mui/material'
-import { MuiTheme } from '@/theme/mui'
-import { sampledata } from '@/db/sample'
-import { Button, Tag, TagLabel, Flex, Text, IconButton } from '@chakra-ui/react'
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { useSetRecoilState } from 'recoil'
-import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
+
+let selectedRows: typeof sampledata = []
 
 export default function DataTable() {
-  const openEditModal = useSetRecoilState(editTeacherModalAtom)
-
   const columns: GridColDef[] = [
     {
       field: 'name',
       headerName: 'Name',
       minWidth: 240,
-      renderCell: (params: GridRenderCellParams) => {
-        return (
-          <Flex justify={'space-between'} align={'center'} w={'100%'} className="parent">
-            <Text textTransform={'capitalize'}>{params.value}</Text>
-            <IconButton
-              icon={<EditIcon />}
-              display={'none'}
-              bgColor={'gray.300'}
-              p={'1px 4px'}
-              borderRadius={'md'}
-              aria-label="edit profile btn"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.stopPropagation()
-                console.log('Edit Teacher')
-                openEditModal({ open: true })
-                console.log('Edit Teacher 2')
-              }}
-              css={{
-                '.parent:hover &': {
-                  display: 'block',
-                },
-              }}
-            />
-          </Flex>
-        )
-      },
     },
     { field: 'email', headerName: 'Email', minWidth: 260 },
     {
@@ -81,7 +54,7 @@ export default function DataTable() {
           autoHeight
           onRowSelectionModelChange={(ids) => {
             const selectedIDs = new Set(ids)
-            const selectedRows = rows.filter((row) => selectedIDs.has(row.id))
+            selectedRows = rows.filter((row) => selectedIDs.has(row.id))
             console.log(selectedRows)
           }}
           initialState={{
@@ -98,8 +71,10 @@ export default function DataTable() {
 }
 
 function CustomToolbar() {
-  function handleDeleteTeacher() {
-    console.log('Delete Teacher.')
+  const openEditModal = useSetRecoilState(editTeacherModalAtom)
+
+  function handleEditModalOpen() {
+    selectedRows.length === 1 && openEditModal({ open: true })
   }
 
   return (
@@ -108,6 +83,17 @@ function CustomToolbar() {
       <GridToolbarColumnsButton />
       <GridToolbarFilterButton />
       <GridToolbarExport />
+      <Button
+        leftIcon={<EditIcon boxSize={'16px'} />}
+        variant={'ghost'}
+        color={'orange.500'}
+        borderRadius={'md'}
+        p={'4px 5px'}
+        _hover={{ color: 'orange.500', bgColor: 'orange.50' }}
+        onClick={handleEditModalOpen}
+      >
+        EDIT
+      </Button>
       <Button
         leftIcon={<DeleteIcon boxSize={'16px'} />}
         variant={'ghost'}
