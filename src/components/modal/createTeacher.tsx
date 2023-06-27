@@ -161,7 +161,7 @@ function MultiClassSelect() {
     <Box mt={4}>
       <CUIAutoComplete
         label="Select classes"
-        placeholder="Type a Country"
+        placeholder="Classes"
         onCreateItem={handleCreateItem}
         items={pickerItems}
         tagStyleProps={{
@@ -172,10 +172,17 @@ function MultiClassSelect() {
           fontSize: '1rem',
         }}
         listStyleProps={{
-          maxH: '100px',
+          maxH: '110px',
           overflowY: 'auto',
           position: 'absolute',
-          width: '75%',
+          width: '50%',
+          zIndex: 10,
+        }}
+        inputStyleProps={{
+          variant: 'filled',
+        }}
+        labelStyleProps={{
+          mb: 0,
         }}
         selectedItems={selectedItems}
         onSelectedItemsChange={(changes) => handleSelectedItemsChange(changes.selectedItems)}
