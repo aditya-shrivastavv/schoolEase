@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import {
   Button,
   Flex,
@@ -21,7 +21,26 @@ import { useForm } from 'react-hook-form'
 
 const EditTeacherModal = () => {
   const [{ open, teacherData }, setIsOpen] = useRecoilState(editTeacherModalAtom)
-  const { register, handleSubmit, reset, formState } = useForm()
+  const { register, handleSubmit, reset, formState } = useForm({
+    defaultValues: useMemo(() => {
+      const teacherFormdata = {
+        firstName: teacherData?.name.split(' ')[0],
+        lastName: teacherData?.name.split(' ')[1] ?? '',
+        email: teacherData?.email,
+        classes: teacherData?.classes,
+      }
+      return teacherFormdata
+    }, [teacherData]),
+  })
+  useEffect(() => {
+    reset({
+      firstName: teacherData?.name.split(' ')[0],
+      lastName: teacherData?.name.split(' ')[1] ?? '',
+      email: teacherData?.email,
+      classes: teacherData?.classes,
+    })
+  }, [reset, teacherData])
+
   function onSubmit(data: any) {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -86,7 +105,7 @@ const EditTeacherModal = () => {
               <Button
                 onClick={() => {
                   reset()
-                  setIsOpen((prev) => ({ ...prev, open: false }))
+                  setIsOpen({ open: false })
                 }}
                 px={6}
                 borderRadius={'full'}
