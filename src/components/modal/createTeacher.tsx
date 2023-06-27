@@ -2,6 +2,7 @@
 
 import { createTeacherModalAtom } from '@/atom/createTeacherModalAtom'
 import {
+  Box,
   Button,
   Flex,
   FormControl,
@@ -18,6 +19,9 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
+import { CUIAutoComplete, Item } from 'chakra-ui-autocomplete'
+import { useState } from 'react'
+import { classList } from '@/db/sample'
 
 const CreateTeacherModal = () => {
   const toast = useToast()
@@ -97,10 +101,11 @@ const CreateTeacherModal = () => {
               </FormControl>
 
               {/* CLASSES */}
-              <FormControl mt={4}>
+              <MultiClassSelect />
+              {/* <FormControl mt={4}>
                 <FormLabel>Assigned Classes</FormLabel>
                 <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" />
-              </FormControl>
+              </FormControl> */}
             </ModalBody>
 
             <ModalFooter>
@@ -134,3 +139,47 @@ const CreateTeacherModal = () => {
 }
 
 export default CreateTeacherModal
+
+// - - - - - - - - - - - - - - - - - - - - - - //
+
+function MultiClassSelect() {
+  const [pickerItems, setPickerItems] = useState(classList)
+  const [selectedItems, setSelectedItems] = useState<Item[]>([])
+
+  const handleCreateItem = (item: Item) => {
+    setPickerItems((curr) => [...curr, item])
+    setSelectedItems((curr) => [...curr, item])
+  }
+
+  const handleSelectedItemsChange = (selectedItems?: Item[]) => {
+    if (selectedItems) {
+      setSelectedItems(selectedItems)
+    }
+  }
+
+  return (
+    <Box mt={4}>
+      <CUIAutoComplete
+        label="Select classes"
+        placeholder="Type a Country"
+        onCreateItem={handleCreateItem}
+        items={pickerItems}
+        tagStyleProps={{
+          rounded: 'full',
+          pt: 1,
+          pb: 2,
+          px: 2,
+          fontSize: '1rem',
+        }}
+        listStyleProps={{
+          maxH: '100px',
+          overflowY: 'auto',
+          position: 'absolute',
+          width: '75%',
+        }}
+        selectedItems={selectedItems}
+        onSelectedItemsChange={(changes) => handleSelectedItemsChange(changes.selectedItems)}
+      />
+    </Box>
+  )
+}

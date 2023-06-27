@@ -22,6 +22,7 @@
     "@types/react-dom": "18.2.5",
     "@xata.io/client": "^0.24.3",
     "chakra-react-select": "^3.3.9",
+    "chakra-ui-autocomplete": "^1.4.5",
     "date-fns": "^2.30.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
