@@ -1,6 +1,7 @@
 'use client'
 
 import { createTeacherModalAtom } from '@/atom/createTeacherModalAtom'
+import { sampleclasses } from '@/db/sample'
 import {
   Button,
   Flex,
@@ -16,18 +17,30 @@ import {
   ModalOverlay,
   useToast,
 } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
+import { Control, UseControllerProps, useController, useForm } from 'react-hook-form'
+import { Select, OptionBase, Props } from 'chakra-react-select'
 import { useRecoilState } from 'recoil'
+
+const classes = sampleclasses
+interface ClassesGroup extends OptionBase {
+  label: string
+  value: string
+}
+interface FormValues {
+  classes: ClassesGroup[]
+}
+
+const defaultClassesGroup: FormValues = { classes: [] }
 
 const CreateTeacherModal = () => {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
-  const { register, handleSubmit, formState, reset } = useForm({
+  const { register, handleSubmit, formState, reset, control } = useForm({
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
-      classes: '',
+      classes: defaultClassesGroup.classes,
     },
   })
   function onSubmit(data: any) {
@@ -97,10 +110,15 @@ const CreateTeacherModal = () => {
               </FormControl>
 
               {/* CLASSES */}
-              <FormControl mt={4}>
-                <FormLabel>Assigned Classes</FormLabel>
-                <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" />
-              </FormControl>
+              <ControlledClassSelect
+                isMulti
+                control={control as unknown as Control<FormValues>}
+                name="classes"
+                id="classes"
+                options={classes}
+                placeholder="Classes"
+                label="Select Classes"
+              />
             </ModalBody>
 
             <ModalFooter>
@@ -130,6 +148,43 @@ const CreateTeacherModal = () => {
         </form>
       </Modal>
     </>
+  )
+}
+
+type ControlledClassSelectProps = UseControllerProps<FormValues> & Props & { label: string }
+
+function ControlledClassSelect({
+  control,
+  name,
+  id,
+  label,
+  rules,
+  ...props
+}: ControlledClassSelectProps) {
+  const {
+    field: { onChange, onBlur, value, ref },
+    fieldState: { error },
+  } = useController<FormValues>({
+    name,
+    control,
+    rules,
+  })
+
+  return (
+    <FormControl py={4} isInvalid={!!error} id={id}>
+      <FormLabel>{label}</FormLabel>
+
+      <Select
+        isMulti
+        // variant={'filled'}
+        name={name}
+        ref={ref}
+        onChange={onChange as (...event: any[]) => void}
+        onBlur={onBlur}
+        value={value}
+        {...props}
+      />
+    </FormControl>
   )
 }
 
