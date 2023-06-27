@@ -12,6 +12,7 @@ import {
   Avatar,
   Box,
   Button,
+  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
@@ -21,17 +22,16 @@ import {
   Heading,
   Icon,
   IconButton,
+  Link,
   Text,
   VStack,
-  ButtonGroup,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import NextLink from 'next/link'
-import { Link } from '@chakra-ui/react'
 import { usePathname } from 'next/navigation'
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 import Logo from '../logo/Logo'
 import Collapser from './Collapser'
-import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 
 const SideBar = () => {
   const pathname = usePathname()

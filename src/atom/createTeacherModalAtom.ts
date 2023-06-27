@@ -8,7 +8,7 @@ const defaultModalState: CreateTeacherModalStateProps = {
   open: false,
 }
 
-export const CreateTeacherModalAtom = atom<CreateTeacherModalStateProps>({
+export const createTeacherModalAtom = atom<CreateTeacherModalStateProps>({
   key: 'createTeacherModal',
   default: defaultModalState,
 })

@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
 export default function Root() {

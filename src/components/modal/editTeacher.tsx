@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useMemo } from 'react'
+import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
 import {
   Button,
   Flex,
@@ -15,9 +15,9 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
-import { useRecoilState } from 'recoil'
-import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
+import { useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
+import { useRecoilState } from 'recoil'
 
 const EditTeacherModal = () => {
   const [{ open, teacherData }, setIsOpen] = useRecoilState(editTeacherModalAtom)

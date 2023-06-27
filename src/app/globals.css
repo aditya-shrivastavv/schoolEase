@@ -30,8 +30,3 @@ body {
   border-radius: 8px;
   border: 1px solid #ffffff;
 }
-
-.data-grid-header {
-  background-color: #e6f7ff;
-  text-transform: capitalize;
-}

@@ -1,7 +1,7 @@
 'use client'
 
-import { CreateTeacherModalAtom } from '@/atom/createTeacherModalAtom'
-import { Divider, Flex, Heading, Button, Box } from '@chakra-ui/react'
+import { createTeacherModalAtom } from '@/atom/createTeacherModalAtom'
+import { Box, Button, Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
 
@@ -10,7 +10,7 @@ type Props = {
 }
 
 const TeachersLayout = ({ children }: Props) => {
-  const toggleCreateTeacherModal = useSetRecoilState(CreateTeacherModalAtom)
+  const toggleCreateTeacherModal = useSetRecoilState(createTeacherModalAtom)
 
   return (
     <Box>

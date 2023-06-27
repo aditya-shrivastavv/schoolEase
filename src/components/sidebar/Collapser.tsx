@@ -1,9 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useColorModeValue } from '@chakra-ui/react'
-import { useRecoilValue } from 'recoil'
 import { sidebarAtom } from '@/atom/sidebarAtom'
+import { useColorModeValue } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
+import { useRecoilValue } from 'recoil'
 
 type Props = {
   children: React.ReactNode

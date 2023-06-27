@@ -1,5 +1,15 @@
 'use client'
 
+import { sidebarAtom } from '@/atom/sidebarAtom'
+import {
+  BellOutlined,
+  ClockCircleOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  SettingOutlined,
+} from '@ant-design/icons'
+import { SearchIcon } from '@chakra-ui/icons'
 import {
   Box,
   Flex,
@@ -9,18 +19,7 @@ import {
   InputLeftElement,
   Spacer,
 } from '@chakra-ui/react'
-import {
-  BellOutlined,
-  ClockCircleOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  SettingOutlined,
-} from '@ant-design/icons'
-import React from 'react'
-import { SearchIcon } from '@chakra-ui/icons'
 import { useRecoilState } from 'recoil'
-import { sidebarAtom } from '@/atom/sidebarAtom'
 
 const HeadBar = () => {
   const [sidebarState, setSidebarState] = useRecoilState(sidebarAtom)

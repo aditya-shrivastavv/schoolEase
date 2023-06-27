@@ -5,22 +5,17 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
-  Menu,
-  Text,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Grid,
   GridItem,
-  Icon,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
 } from '@chakra-ui/react'
 import Image from 'next/image'
-import React from 'react'
 
-type Props = {}
-
-const Dashboard = (props: Props) => {
+const Dashboard = () => {
   return (
     <Box px={5} py={'22px'} bgColor={'secondary.A100'} mt={12}>
       <Flex justify={'space-between'} align={'center'} mb={5}>

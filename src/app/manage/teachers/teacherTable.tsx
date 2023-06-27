@@ -20,7 +20,7 @@ import { useSetRecoilState } from 'recoil'
 
 let selectedRows: SampleDataType = []
 
-export default function DataTable() {
+export default function TeacherTable() {
   const columns: GridColDef[] = [
     {
       field: 'name',
@@ -40,7 +40,6 @@ export default function DataTable() {
         )),
     },
   ]
-
   const rows = sampledata
 
   return (
@@ -71,9 +70,8 @@ export default function DataTable() {
 }
 
 function CustomToolbar() {
-  const teacherEditModal = useSetRecoilState(editTeacherModalAtom)
   const toast = useToast()
-
+  const teacherEditModal = useSetRecoilState(editTeacherModalAtom)
   function handleEditModalOpen() {
     if (selectedRows.length !== 1) {
       toast({

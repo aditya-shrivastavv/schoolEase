@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import { createTeacherModalAtom } from '@/atom/createTeacherModalAtom'
 import {
   Button,
   Flex,
@@ -16,12 +16,12 @@ import {
   ModalOverlay,
   useToast,
 } from '@chakra-ui/react'
-import { useRecoilState } from 'recoil'
-import { CreateTeacherModalAtom } from '@/atom/createTeacherModalAtom'
 import { useForm } from 'react-hook-form'
+import { useRecoilState } from 'recoil'
 
 const CreateTeacherModal = () => {
   const toast = useToast()
+  const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
   const { register, handleSubmit, formState, reset } = useForm({
     defaultValues: {
       firstName: '',
@@ -30,7 +30,6 @@ const CreateTeacherModal = () => {
       classes: '',
     },
   })
-  const [{ open }, setIsOpen] = useRecoilState(CreateTeacherModalAtom)
   function onSubmit(data: any) {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -50,7 +49,8 @@ const CreateTeacherModal = () => {
       isClosable: true,
     })
     reset()
-  } else if (formState.isSubmitted && !formState.isSubmitSuccessful) {
+  }
+  if (formState.isSubmitted && !formState.isSubmitSuccessful) {
     toast({
       title: 'Error!',
       description: 'Some Unexpected error occured.',

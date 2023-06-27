@@ -1,7 +1,6 @@
-import { SampleDataType } from '@/db/sample'
 import { atom } from 'recoil'
 
-interface TeacherInterface {
+interface EditTeacherData {
   name: string
   email: string
   classes: string[]
@@ -9,7 +8,7 @@ interface TeacherInterface {
 
 export interface EditTeacherModalStateProps {
   open: boolean
-  teacherData?: TeacherInterface
+  teacherData?: EditTeacherData
 }
 
 const defaultModalState: EditTeacherModalStateProps = {
