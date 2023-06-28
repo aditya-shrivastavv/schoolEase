@@ -21,6 +21,7 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@xata.io/client": "^0.24.3",
+    "chroma-js": "^2.4.2",
     "date-fns": "^2.30.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
@@ -33,5 +34,8 @@
     "react-select": "^5.7.3",
     "recoil": "^0.7.7",
     "typescript": "5.1.3"
+  },
+  "devDependencies": {
+    "@types/chroma-js": "^2.4.0"
   }
 }

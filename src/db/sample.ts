@@ -124,16 +124,16 @@ export const sampledata = [
 export type SampleDataType = typeof sampledata
 
 export const classList = [
-  { label: '9-Tulip', value: '9-Tulip' },
-  { label: '10-Tulip', value: '10-Tulip' },
-  { label: '11-Tulip', value: '11-Tulip' },
-  { label: '12-Tulip', value: '12-Tulip' },
-  { label: '9-Rose', value: '9-Rose' },
-  { label: '10-Rose', value: '10-Rose' },
-  { label: '11-Rose', value: '11-Rose' },
-  { label: '12-Rose', value: '12-Rose' },
-  { label: '9-Lily', value: '9-Lily' },
-  { label: '10-Lily', value: '10-Lily' },
-  { label: '11-Lily', value: '11-Lily' },
-  { label: '12-Lily', value: '12-Lily' },
+  { label: '10-Tulip', value: '10-Tulip', color: '#ffe6cc' },
+  { label: '11-Tulip', value: '11-Tulip', color: '#fff2cc' },
+  { label: '12-Tulip', value: '12-Tulip', color: '#e6ffe6' },
+  { label: '9-Rose', value: '9-Rose', color: '#ffe6e6' },
+  { label: '10-Rose', value: '10-Rose', color: '#e6e6ff' },
+  { label: '11-Rose', value: '11-Rose', color: '#f2f2f2' },
+  { label: '12-Rose', value: '12-Rose', color: '#ffffcc' },
+  { label: '9-Lily', value: '9-Lily', color: '#e6f9ff' },
+  { label: '10-Lily', value: '10-Lily', color: '#f9e6ff' },
+  { label: '11-Lily', value: '11-Lily', color: '#f2e6ff' },
+  { label: '12-Lily', value: '12-Lily', color: '#e6f2ff' },
+  { label: '9-Tulip', value: '9-Tulip', color: '#ffffcc' },
 ]

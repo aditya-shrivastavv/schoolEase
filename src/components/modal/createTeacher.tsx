@@ -18,6 +18,51 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
+import Select, { StylesConfig } from 'react-select'
+import { classList } from '@/db/sample'
+import chroma from 'chroma-js'
+
+const classesStyles: StylesConfig<(typeof classList)[0], true> = {
+  control: (styles) => ({ ...styles, backgroundColor: 'white' }),
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    const color = chroma(data.color)
+    return {
+      ...styles,
+      backgroundColor: isDisabled
+        ? undefined
+        : isSelected
+        ? data.color
+        : isFocused
+        ? '#E8E8E8'
+        : undefined,
+      cursor: isDisabled ? 'not-allowed' : 'default',
+
+      ':active': {
+        ...styles[':active'],
+        backgroundColor: '#E8E8E8',
+      },
+      ':hover': {
+        ...styles[':hover'],
+        backgroundColor: '#E8E8E8',
+      },
+    }
+  },
+  multiValue: (styles, { data }) => ({
+    ...styles,
+    backgroundColor: data.color,
+  }),
+  // multiValueLabel: (styles, { data }) => ({
+  //   ...styles,
+  //   // color: data.color,
+  // }),
+  multiValueRemove: (styles, { data }) => ({
+    ...styles,
+    ':hover': {
+      backgroundColor: data.color,
+      color: '#555555',
+    },
+  }),
+}
 
 const CreateTeacherModal = () => {
   const toast = useToast()
@@ -81,10 +126,22 @@ const CreateTeacherModal = () => {
               </FormControl>
 
               {/* CLASSES */}
+
               <FormControl mt={4}>
                 <FormLabel>Assigned Classes</FormLabel>
-                <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" />
+                <Select
+                  isMulti
+                  closeMenuOnSelect={false}
+                  options={classList}
+                  styles={classesStyles}
+                />
               </FormControl>
+              {/* <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" /> */}
+
+              {/* <FormControl mt={4}>
+                <FormLabel>Assigned Classes</FormLabel>
+                <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" />
+              </FormControl> */}
             </ModalBody>
 
             <ModalFooter>
