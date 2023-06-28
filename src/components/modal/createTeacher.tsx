@@ -2,7 +2,6 @@
 
 import { createTeacherModalAtom } from '@/atom/createTeacherModalAtom'
 import {
-  Box,
   Button,
   Flex,
   FormControl,
@@ -31,35 +30,19 @@ const CreateTeacherModal = () => {
       classes: '',
     },
   })
+  if (formState.isSubmitted && formState.isSubmitSuccessful) {
+    teacherAddedToast(toast)
+    reset()
+  }
+  if (formState.isSubmitted && !formState.isSubmitSuccessful) {
+    errorToast(toast)
+  }
+
   function onSubmit(data: any) {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(console.log(data))
       }, 2000)
-    })
-  }
-
-  if (formState.isSubmitted && formState.isSubmitSuccessful) {
-    toast({
-      title: 'Success!',
-      description: "We've added the teacher for you.",
-      status: 'success',
-      duration: 6000,
-      position: 'top-right',
-      variant: 'top-accent',
-      isClosable: true,
-    })
-    reset()
-  }
-  if (formState.isSubmitted && !formState.isSubmitSuccessful) {
-    toast({
-      title: 'Error!',
-      description: 'Some Unexpected error occured.',
-      status: 'error',
-      duration: 6000,
-      position: 'top-right',
-      variant: 'top-accent',
-      isClosable: true,
     })
   }
 
@@ -135,3 +118,26 @@ const CreateTeacherModal = () => {
 }
 
 export default CreateTeacherModal
+
+function teacherAddedToast(toast: any) {
+  toast({
+    title: 'Success!',
+    description: "We've added the teacher for you.",
+    status: 'success',
+    duration: 6000,
+    position: 'top-right',
+    variant: 'top-accent',
+    isClosable: true,
+  })
+}
+function errorToast(toast: any) {
+  toast({
+    title: 'Error!',
+    description: 'Some Unexpected error occured.',
+    status: 'error',
+    duration: 6000,
+    position: 'top-right',
+    variant: 'top-accent',
+    isClosable: true,
+  })
+}
