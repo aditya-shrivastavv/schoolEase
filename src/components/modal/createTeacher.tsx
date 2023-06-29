@@ -16,16 +16,24 @@ import {
   ModalOverlay,
   useToast,
 } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
-import Select, { StylesConfig } from 'react-select'
+import Select, {
+  CSSObjectWithLabel,
+  GroupBase,
+  StylesConfig,
+  ClearIndicatorProps,
+} from 'react-select'
 import { classList } from '@/db/sample'
 import chroma from 'chroma-js'
 
-const classesStyles: StylesConfig<(typeof classList)[0], true> = {
+const classesStyles: StylesConfig<
+  { label: string; value: string; color: string },
+  true,
+  GroupBase<{ label: string; value: string; color: string }>
+> = {
   control: (styles) => ({ ...styles, backgroundColor: 'white' }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-    const color = chroma(data.color)
     return {
       ...styles,
       backgroundColor: isDisabled
@@ -64,15 +72,24 @@ const classesStyles: StylesConfig<(typeof classList)[0], true> = {
   }),
 }
 
+interface TeacherFormData {
+  firstName: string
+  lastName: string
+  email: string
+  classes:
+    | { value: string; label: string; color: string }[]
+    | readonly { value: string; label: string; color: string }[]
+}
+
 const CreateTeacherModal = () => {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
-  const { register, handleSubmit, formState, reset } = useForm({
+  const { register, handleSubmit, formState, reset, control } = useForm<TeacherFormData>({
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
-      classes: '',
+      classes: [],
     },
   })
   if (formState.isSubmitted && formState.isSubmitSuccessful) {
@@ -127,21 +144,26 @@ const CreateTeacherModal = () => {
 
               {/* CLASSES */}
 
-              <FormControl mt={4}>
-                <FormLabel>Assigned Classes</FormLabel>
-                <Select
-                  isMulti
-                  closeMenuOnSelect={false}
-                  options={classList}
-                  styles={classesStyles}
-                />
-              </FormControl>
-              {/* <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" /> */}
-
-              {/* <FormControl mt={4}>
-                <FormLabel>Assigned Classes</FormLabel>
-                <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" />
-              </FormControl> */}
+              <Controller<TeacherFormData>
+                name="classes"
+                control={control}
+                render={({ field: { onChange, onBlur, ref, name, value }, fieldState }) => (
+                  <FormControl mt={4}>
+                    <FormLabel>Assigned Classes</FormLabel>
+                    <Select
+                      isMulti
+                      ref={ref}
+                      onBlur={onBlur}
+                      name={name}
+                      value={value}
+                      onChange={(newValue) => onChange(newValue)}
+                      closeMenuOnSelect={false}
+                      options={classList}
+                      styles={classesStyles as StylesConfig<any, true, any>}
+                    />
+                  </FormControl>
+                )}
+              />
             </ModalBody>
 
             <ModalFooter>
