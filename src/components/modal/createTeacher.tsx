@@ -26,6 +26,7 @@ import Select, {
 } from 'react-select'
 import { classList } from '@/db/sample'
 import chroma from 'chroma-js'
+import { errorToast, teacherAddedToast } from '../toast/toast'
 
 const classesStyles: StylesConfig<
   { label: string; value: string; color: string },
@@ -197,26 +198,3 @@ const CreateTeacherModal = () => {
 }
 
 export default CreateTeacherModal
-
-function teacherAddedToast(toast: any) {
-  toast({
-    title: 'Success!',
-    description: "We've added the teacher for you.",
-    status: 'success',
-    duration: 6000,
-    position: 'top-right',
-    variant: 'top-accent',
-    isClosable: true,
-  })
-}
-function errorToast(toast: any) {
-  toast({
-    title: 'Error!',
-    description: 'Some Unexpected error occured.',
-    status: 'error',
-    duration: 6000,
-    position: 'top-right',
-    variant: 'top-accent',
-    isClosable: true,
-  })
-}

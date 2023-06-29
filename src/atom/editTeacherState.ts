@@ -1,16 +1,20 @@
 import { atom } from 'recoil'
 
-export interface EditTeacherModalProps {
+export type TeacherData = {
+  id: number
+  name: string
+  email: string
+  classes: string[]
+}[]
+
+export type EditTeacherModalProps = {
   open: boolean
-  teacherData?: {
-    name: string
-    email: string
-    classes: string[]
-  }
+  teacherData: TeacherData
 }
 
 const defaultModalState: EditTeacherModalProps = {
   open: false,
+  teacherData: [{ id: -0, name: '', email: '', classes: [''] }],
 }
 
 export const editTeacherModalAtom = atom<EditTeacherModalProps>({

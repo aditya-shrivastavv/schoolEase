@@ -1,7 +1,8 @@
 'use client'
 
-import { editTeacherModalAtom } from '@/atom/editTeacherState'
-import { SampleDataType, sampledata } from '@/db/sample'
+import { type TeacherData, editTeacherModalAtom } from '@/atom/editTeacherState'
+import { multipleRowEditToastWarn } from '@/components/toast/toast'
+import { sampledata } from '@/db/sample'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Button, Tag, TagLabel, useToast } from '@chakra-ui/react'
@@ -18,7 +19,7 @@ import {
 } from '@mui/x-data-grid'
 import { useSetRecoilState } from 'recoil'
 
-let selectedRows: SampleDataType = []
+let selectedRows: TeacherData = []
 
 export default function TeacherTable() {
   const rows = sampledata
@@ -72,19 +73,14 @@ export default function TeacherTable() {
 function CustomToolbar() {
   const toast = useToast()
   const handleTeacherEditModal = useSetRecoilState(editTeacherModalAtom)
-  function handleEditModalOpen() {
+  function handleEditModal() {
     if (selectedRows.length !== 1) {
-      toast({
-        title: 'Invalid Operation!',
-        description: 'Please select a single row to edit.',
-        status: 'warning',
-        duration: 4000,
-        position: 'top-right',
-        variant: 'top-accent',
-        isClosable: true,
-      })
+      multipleRowEditToastWarn(toast)
     } else {
-      handleTeacherEditModal({ open: true, teacherData: selectedRows.at(0) })
+      handleTeacherEditModal({
+        open: true,
+        teacherData: [selectedRows[0]],
+      })
     }
   }
 
@@ -101,7 +97,7 @@ function CustomToolbar() {
         borderRadius={'md'}
         p={'4px 5px'}
         _hover={{ color: 'orange.500', bgColor: 'orange.50' }}
-        onClick={handleEditModalOpen}
+        onClick={handleEditModal}
       >
         EDIT
       </Button>
