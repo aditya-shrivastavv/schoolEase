@@ -43,7 +43,7 @@ const SideBar = () => {
           <Box>
             <Box>
               <Flex m={'25px'}>
-                <Logo hw={30} />
+                <Logo squareSideLength={30} />
                 <Text fontWeight={800} fontSize={'xl'} ml={2}>
                   SchoolEase
                 </Text>

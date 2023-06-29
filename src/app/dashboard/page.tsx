@@ -15,6 +15,37 @@ import {
 } from '@chakra-ui/react'
 import Image from 'next/image'
 
+const linkCards = [
+  {
+    title: 'Manage Teachers',
+    bgImgUrl: 'url("/curves/wave-pink.png")',
+    illustrationUrl: '/illustrations/teacher.svg',
+    illustrationAlt: 'teacher illustration',
+    btnBgColor: '#fbc3d1',
+  },
+  {
+    title: 'Manage Students',
+    bgImgUrl: 'url("/curves/wave-green.png")',
+    illustrationUrl: '/illustrations/student.svg',
+    illustrationAlt: 'student illustration',
+    btnBgColor: '#b9edd8',
+  },
+  {
+    title: 'Manage Classes',
+    bgImgUrl: 'url("/curves/wave-yellow.png")',
+    illustrationUrl: '/illustrations/class.svg',
+    illustrationAlt: 'class illustration',
+    btnBgColor: '#feda78',
+  },
+  {
+    title: 'Manage Exams',
+    bgImgUrl: 'url("/curves/wave-blue.png")',
+    illustrationUrl: '/illustrations/exam.svg',
+    illustrationAlt: 'exam illustration',
+    btnBgColor: '#c3e7fe',
+  },
+]
+
 const Dashboard = () => {
   return (
     <Box px={5} py={'22px'} bgColor={'secondary.A100'} mt={12}>
@@ -31,142 +62,43 @@ const Dashboard = () => {
         </Menu>
       </Flex>
       <Grid templateColumns="repeat(4, 1fr)" gap={'22px'}>
-        <GridItem
-          p={'16px'}
-          border={'1px solid'}
-          borderRadius={'lg'}
-          borderColor={'secondary.200'}
-          bgImage={'url("/curves/wave-pink.png")'}
-          bgSize={'170%'}
-          bgRepeat={'no-repeat'}
-          bgPos={'bottom'}
-          h={'350px'}
-          display={'flex'}
-          flexDirection={'column'}
-          justifyContent={'space-between'}
-        >
-          <Image
-            src={'/illustrations/teacher.svg'}
-            width={1}
-            height={1}
-            alt="teacher illustration"
-            style={{
-              width: '100%',
-            }}
-          />
-          <Button
-            alignSelf={'end'}
-            bgColor={'#fbc3d1'}
-            color={'secondary.800'}
-            size={'sm'}
+        {linkCards.map((card) => (
+          <GridItem
+            key={card.title}
+            p={'16px'}
+            border={'1px solid'}
+            borderRadius={'lg'}
+            borderColor={'secondary.200'}
+            bgImage={card.bgImgUrl}
+            bgSize={'170%'}
+            bgRepeat={'no-repeat'}
+            bgPos={'bottom'}
+            h={'350px'}
             display={'flex'}
-            _hover={{ shadow: 'md' }}
+            flexDirection={'column'}
+            justifyContent={'space-between'}
           >
-            Manage Teachers
-          </Button>
-        </GridItem>
-        <GridItem
-          p={'16px'}
-          border={'1px solid'}
-          borderRadius={'lg'}
-          borderColor={'secondary.200'}
-          bgImage={'url("/curves/wave-green.png")'}
-          bgPos={'bottom'}
-          bgSize={'170%'}
-          bgRepeat={'no-repeat'}
-          h={'350px'}
-          display={'flex'}
-          flexDirection={'column'}
-          justifyContent={'space-between'}
-        >
-          <Image
-            src={'/illustrations/student.svg'}
-            width={1}
-            height={1}
-            alt="teacher illustration"
-            style={{
-              width: '100%',
-            }}
-          />
-          <Button
-            alignSelf={'end'}
-            bgColor={'#b9edd8'}
-            color={'secondary.800'}
-            size={'sm'}
-            display={'flex'}
-            _hover={{ shadow: 'md' }}
-          >
-            Manage Students
-          </Button>
-        </GridItem>
-        <GridItem
-          p={'16px'}
-          border={'1px solid'}
-          borderRadius={'lg'}
-          borderColor={'secondary.200'}
-          bgImage={'url("/curves/wave-yellow.png")'}
-          bgPos={'bottom'}
-          bgSize={'170%'}
-          bgRepeat={'no-repeat'}
-          h={'350px'}
-          display={'flex'}
-          flexDirection={'column'}
-          justifyContent={'space-between'}
-        >
-          <Image
-            src={'/illustrations/class.svg'}
-            width={1}
-            height={1}
-            alt="teacher illustration"
-            style={{
-              width: '100%',
-            }}
-          />
-          <Button
-            alignSelf={'end'}
-            bgColor={'#feda78'}
-            color={'secondary.800'}
-            size={'sm'}
-            display={'flex'}
-            _hover={{ shadow: 'md' }}
-          >
-            Manage Classes
-          </Button>
-        </GridItem>
-        <GridItem
-          p={'16px'}
-          border={'1px solid'}
-          borderRadius={'lg'}
-          borderColor={'secondary.200'}
-          bgImage={'url("/curves/wave-blue.png")'}
-          bgPos={'bottom'}
-          bgSize={'170%'}
-          bgRepeat={'no-repeat'}
-          h={'350px'}
-          display={'flex'}
-          flexDirection={'column'}
-          justifyContent={'space-between'}
-        >
-          <Image
-            src={'/illustrations/exam.svg'}
-            width={1}
-            height={1}
-            alt="teacher illustration"
-            style={{
-              width: '100%',
-            }}
-          />
-          <Button
-            alignSelf={'end'}
-            bgColor={'#c3e7fe'}
-            color={'secondary.800'}
-            size={'sm'}
-            display={'flex'}
-            _hover={{ shadow: 'md' }}
-          >
-            Manage Exams
-          </Button>
-        </GridItem>
+            <Image
+              src={card.illustrationUrl}
+              width={1}
+              height={1}
+              alt={card.illustrationAlt}
+              style={{
+                width: '100%',
+              }}
+            />
+            <Button
+              alignSelf={'end'}
+              bgColor={card.btnBgColor}
+              color={'secondary.800'}
+              size={'sm'}
+              display={'flex'}
+              _hover={{ shadow: 'md' }}
+            >
+              {card.title}
+            </Button>
+          </GridItem>
+        ))}
       </Grid>
     </Box>
   )

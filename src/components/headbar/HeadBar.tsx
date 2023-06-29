@@ -1,6 +1,6 @@
 'use client'
 
-import { sidebarAtom } from '@/atom/sidebarAtom'
+import { sidebarAtom } from '@/atom/sidebarState'
 import {
   BellOutlined,
   ClockCircleOutlined,

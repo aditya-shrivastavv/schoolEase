@@ -1,6 +1,6 @@
 'use client'
 
-import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
+import { editTeacherModalAtom } from '@/atom/editTeacherState'
 import { SampleDataType, sampledata } from '@/db/sample'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
@@ -21,6 +21,7 @@ import { useSetRecoilState } from 'recoil'
 let selectedRows: SampleDataType = []
 
 export default function TeacherTable() {
+  const rows = sampledata
   const columns: GridColDef[] = [
     {
       field: 'name',
@@ -40,7 +41,6 @@ export default function TeacherTable() {
         )),
     },
   ]
-  const rows = sampledata
 
   return (
     <div style={{ width: '100%' }}>
@@ -71,7 +71,7 @@ export default function TeacherTable() {
 
 function CustomToolbar() {
   const toast = useToast()
-  const teacherEditModal = useSetRecoilState(editTeacherModalAtom)
+  const handleTeacherEditModal = useSetRecoilState(editTeacherModalAtom)
   function handleEditModalOpen() {
     if (selectedRows.length !== 1) {
       toast({
@@ -84,7 +84,7 @@ function CustomToolbar() {
         isClosable: true,
       })
     } else {
-      teacherEditModal({ open: true, teacherData: selectedRows[0] })
+      handleTeacherEditModal({ open: true, teacherData: selectedRows.at(0) })
     }
   }
 

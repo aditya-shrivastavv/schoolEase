@@ -5,7 +5,7 @@ import SideBar from '@/components/sidebar/SideBar'
 import HeadBar from '@/components/headbar/HeadBar'
 import { Box, Flex } from '@chakra-ui/react'
 import { useRecoilValue } from 'recoil'
-import { sidebarAtom } from '@/atom/sidebarAtom'
+import { sidebarAtom } from '@/atom/sidebarState'
 import EditTeacherModal from '@/components/modal/editTeacher'
 import CreateTeacherModal from '@/components/modal/createTeacher'
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { sidebarAtom } from '@/atom/sidebarAtom'
+import { sidebarAtom } from '@/atom/sidebarState'
 import { useColorModeValue } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useRecoilValue } from 'recoil'

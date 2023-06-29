@@ -1,6 +1,6 @@
 'use client'
 
-import { editTeacherModalAtom } from '@/atom/editTeacherModalAtom'
+import { editTeacherModalAtom } from '@/atom/editTeacherState'
 import {
   Button,
   Flex,

@@ -1,6 +1,6 @@
 'use client'
 
-import { createTeacherModalAtom } from '@/atom/createTeacherModalAtom'
+import { createTeacherModalAtom } from '@/atom/createTeacherState'
 import {
   Button,
   Flex,
