@@ -21,25 +21,21 @@ import { useRecoilState } from 'recoil'
 
 const EditTeacherModal = () => {
   const [{ open, teacherData }, setIsOpen] = useRecoilState(editTeacherModalAtom)
+  const teacherProps = useMemo(
+    () => ({
+      firstName: teacherData[0].name.split(' ')[0],
+      lastName: teacherData[0].name.split(' ')[1] ?? '',
+      email: teacherData[0].email,
+      classes: teacherData[0].classes,
+    }),
+    [teacherData]
+  )
   const { register, handleSubmit, reset, formState } = useForm({
-    defaultValues: useMemo(() => {
-      const teacherFormdata = {
-        firstName: teacherData?.name.split(' ')[0],
-        lastName: teacherData?.name.split(' ')[1] ?? '',
-        email: teacherData?.email,
-        classes: teacherData?.classes,
-      }
-      return teacherFormdata
-    }, [teacherData]),
+    defaultValues: useMemo(() => teacherProps, [teacherProps]),
   })
   useEffect(() => {
-    reset({
-      firstName: teacherData?.name.split(' ')[0],
-      lastName: teacherData?.name.split(' ')[1] ?? '',
-      email: teacherData?.email,
-      classes: teacherData?.classes,
-    })
-  }, [reset, teacherData])
+    reset(teacherProps)
+  }, [reset, teacherProps])
 
   function onSubmit(data: any) {
     return new Promise((resolve) => {
@@ -51,7 +47,11 @@ const EditTeacherModal = () => {
 
   return (
     <>
-      <Modal isOpen={open} size={'xl'} onClose={() => setIsOpen({ open: false })}>
+      <Modal
+        isOpen={open}
+        size={'xl'}
+        onClose={() => setIsOpen((prev) => ({ ...prev, open: false }))}
+      >
         <ModalOverlay />
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalContent>
@@ -105,7 +105,7 @@ const EditTeacherModal = () => {
               <Button
                 onClick={() => {
                   reset()
-                  setIsOpen({ open: false })
+                  setIsOpen((prev) => ({ ...prev, open: false }))
                 }}
                 px={6}
                 borderRadius={'full'}
