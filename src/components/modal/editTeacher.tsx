@@ -16,8 +16,11 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react'
 import { useEffect, useMemo } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
+import Select, { ActionMeta, MultiValue, StylesConfig } from 'react-select'
+import { classList } from '@/db/sample'
+import selectStyles from '../select/styles/selectStyles'
 
 const EditTeacherModal = () => {
   const [{ open, teacherData }, setIsOpen] = useRecoilState(editTeacherModalAtom)
@@ -26,11 +29,11 @@ const EditTeacherModal = () => {
       firstName: teacherData.name.split(' ')[0],
       lastName: teacherData.name.split(' ')[1] ?? '',
       email: teacherData.email,
-      classes: teacherData.classes.map((c) => c.value),
+      classes: teacherData.classes,
     }),
     [teacherData]
   )
-  const { register, handleSubmit, reset, formState } = useForm({
+  const { register, handleSubmit, reset, formState, control } = useForm<TeacherFormProps>({
     defaultValues: useMemo(() => teacherProps, [teacherProps]),
   })
   useEffect(() => {
@@ -84,10 +87,31 @@ const EditTeacherModal = () => {
               </FormControl>
 
               {/* CLASSES */}
-              <FormControl mt={4}>
-                <FormLabel>Assigned Classes</FormLabel>
-                <Input {...register('classes')} variant={'filled'} placeholder="Assigned classes" />
-              </FormControl>
+              <Controller<TeacherFormProps>
+                name="classes"
+                control={control}
+                render={({ field: { onChange, onBlur, ref, name, value }, fieldState }) => (
+                  <FormControl mt={4}>
+                    <FormLabel>Assigned Classes</FormLabel>
+                    <Select
+                      isMulti
+                      ref={ref}
+                      onBlur={onBlur}
+                      name={name}
+                      value={value}
+                      onChange={
+                        onChange as unknown as (
+                          newValue: MultiValue<unknown>,
+                          actionMeta: ActionMeta<unknown>
+                        ) => void
+                      }
+                      closeMenuOnSelect={false}
+                      options={classList}
+                      styles={selectStyles as StylesConfig}
+                    />
+                  </FormControl>
+                )}
+              />
             </ModalBody>
 
             <ModalFooter>
