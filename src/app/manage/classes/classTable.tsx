@@ -14,9 +14,10 @@ import {
 } from '@mui/x-data-grid'
 import { classData } from '@/db/sample'
 import { MuiTheme } from '@/theme/mui'
-import { Button, useToast } from '@chakra-ui/react'
+import { Button, Link, useToast } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { multipleRowEditToastWarn } from '@/components/toast/toast'
+import NextLink from 'next/link'
 
 let selectedRows: typeof classData = []
 
@@ -28,6 +29,16 @@ export default function ClassTable() {
       headerName: 'Class',
       minWidth: 350,
       flex: 1,
+      renderCell: (params: GridRenderCellParams) => (
+        <Link
+          as={NextLink}
+          href={`/manage/classes/${params.value}`}
+          onClick={(e) => e.stopPropagation}
+          _hover={{ textDecoration: 'underline' }}
+        >
+          {params.value}
+        </Link>
+      ),
     },
   ]
 
