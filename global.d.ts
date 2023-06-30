@@ -13,3 +13,10 @@ type ClassProps = {
   value: string
   color: string
 }
+
+type TeacherData = {
+  id: number
+  name: string
+  email: string
+  classes: string[]
+}
