@@ -1,5 +1,8 @@
 'use client'
 
+/**
+ * IMPORTS
+ */
 import { createTeacherModalAtom } from '@/atom/createTeacherState'
 import {
   Button,
@@ -18,16 +21,15 @@ import {
 } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
-import Select, { GroupBase, StylesConfig } from 'react-select'
+import Select, { ActionMeta, GroupBase, MultiValue, StylesConfig } from 'react-select'
 import { classList } from '@/db/sample'
 import { errorToast, teacherAddedToast } from '../toast/toast'
 import { useEffect } from 'react'
 
-const classesStyles: StylesConfig<
-  { label: string; value: string; color: string },
-  true,
-  GroupBase<{ label: string; value: string; color: string }>
-> = {
+/**
+ * Multi select styles
+ */
+const selectStyles: StylesConfig<ClassProps, true, GroupBase<ClassProps>> = {
   control: (styles) => ({ ...styles, backgroundColor: 'white' }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {
@@ -64,19 +66,10 @@ const classesStyles: StylesConfig<
   }),
 }
 
-interface TeacherFormData {
-  firstName: string
-  lastName: string
-  email: string
-  classes:
-    | { value: string; label: string; color: string }[]
-    | readonly { value: string; label: string; color: string }[]
-}
-
 const CreateTeacherModal = () => {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
-  const { register, handleSubmit, formState, reset, control } = useForm<TeacherFormData>({
+  const { register, handleSubmit, formState, reset, control } = useForm<TeacherFormProps>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -138,7 +131,7 @@ const CreateTeacherModal = () => {
 
               {/* CLASSES */}
 
-              <Controller<TeacherFormData>
+              <Controller<TeacherFormProps>
                 name="classes"
                 control={control}
                 render={({ field: { onChange, onBlur, ref, name, value }, fieldState }) => (
@@ -150,10 +143,15 @@ const CreateTeacherModal = () => {
                       onBlur={onBlur}
                       name={name}
                       value={value}
-                      onChange={(newValue) => onChange(newValue)}
+                      onChange={
+                        onChange as unknown as (
+                          newValue: MultiValue<unknown>,
+                          actionMeta: ActionMeta<unknown>
+                        ) => void
+                      }
                       closeMenuOnSelect={false}
                       options={classList}
-                      styles={classesStyles as StylesConfig<any, true, any>}
+                      styles={selectStyles as StylesConfig}
                     />
                   </FormControl>
                 )}
