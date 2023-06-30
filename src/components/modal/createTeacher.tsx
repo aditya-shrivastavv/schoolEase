@@ -18,15 +18,10 @@ import {
 } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
-import Select, {
-  CSSObjectWithLabel,
-  GroupBase,
-  StylesConfig,
-  ClearIndicatorProps,
-} from 'react-select'
+import Select, { GroupBase, StylesConfig } from 'react-select'
 import { classList } from '@/db/sample'
-import chroma from 'chroma-js'
 import { errorToast, teacherAddedToast } from '../toast/toast'
+import { useEffect } from 'react'
 
 const classesStyles: StylesConfig<
   { label: string; value: string; color: string },
@@ -60,10 +55,6 @@ const classesStyles: StylesConfig<
     ...styles,
     backgroundColor: data.color,
   }),
-  // multiValueLabel: (styles, { data }) => ({
-  //   ...styles,
-  //   // color: data.color,
-  // }),
   multiValueRemove: (styles, { data }) => ({
     ...styles,
     ':hover': {
@@ -93,13 +84,15 @@ const CreateTeacherModal = () => {
       classes: [],
     },
   })
-  if (formState.isSubmitted && formState.isSubmitSuccessful) {
-    teacherAddedToast(toast)
-    reset()
-  }
-  if (formState.isSubmitted && !formState.isSubmitSuccessful) {
-    errorToast(toast)
-  }
+  useEffect(() => {
+    if (formState.isSubmitted && formState.isSubmitSuccessful) {
+      teacherAddedToast(toast)
+      reset()
+    }
+    if (formState.isSubmitted && !formState.isSubmitSuccessful) {
+      errorToast(toast)
+    }
+  }, [formState.isSubmitted, formState.isSubmitSuccessful, reset, toast])
 
   function onSubmit(data: any) {
     return new Promise((resolve) => {
