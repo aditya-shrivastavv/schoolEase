@@ -141,23 +141,44 @@ const SideBar = () => {
                 h={'44px'}
                 align={'center'}
                 _hover={{ bgColor: 'primary.lighter' }}
-                bgColor={pathname === '/manage/students' ? 'primary.lighter' : ''}
-                borderRight={pathname === '/manage/students' ? '2px solid' : ''}
+                bgColor={pathname.startsWith('/manage/students') ? 'primary.lighter' : ''}
+                borderRight={pathname.startsWith('/manage/students') ? '2px solid' : ''}
                 borderRightColor={'primary.main'}
               >
                 <Icon
                   as={TeamOutlined}
-                  color={pathname === '/manage/students' ? 'primary.main' : ''}
+                  color={pathname.startsWith('/manage/students') ? 'primary.main' : ''}
                 />
-                <Text ml={2.5} color={pathname === '/manage/students' ? 'primary.main' : ''}>
+                <Text
+                  ml={2.5}
+                  color={pathname.startsWith('/manage/students') ? 'primary.main' : ''}
+                >
                   Students
                 </Text>
               </Flex>
               {/* CLASSES */}
-              <Flex px={'25px'} h={'44px'} align={'center'} _hover={{ bgColor: 'primary.lighter' }}>
-                <Icon as={CodeOutlined} />
-                <Text ml={2.5}>Classes</Text>
-              </Flex>
+              <Link as={NextLink} _hover={{ textDecoration: 'none' }} href="/manage/classes">
+                <Flex
+                  px={'25px'}
+                  h={'44px'}
+                  align={'center'}
+                  _hover={{ bgColor: 'primary.lighter' }}
+                  bgColor={pathname.startsWith('/manage/classes') ? 'primary.lighter' : ''}
+                  borderRight={pathname.startsWith('/manage/classes') ? '2px solid' : ''}
+                  borderRightColor={'primary.main'}
+                >
+                  <Icon
+                    as={CodeOutlined}
+                    color={pathname.startsWith('/manage/classes') ? 'primary.main' : ''}
+                  />
+                  <Text
+                    ml={2.5}
+                    color={pathname.startsWith('/manage/classes') ? 'primary.main' : ''}
+                  >
+                    Classes
+                  </Text>
+                </Flex>
+              </Link>
               <Text
                 fontWeight={'extrabold'}
                 fontSize={'xs'}

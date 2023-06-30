@@ -124,8 +124,6 @@ export const sampledata = [
   },
 ]
 
-export type SampleDataType = typeof sampledata
-
 export const classList = [
   { label: '11-Rose', value: '11-Rose', color: '#f2f2f2' },
   { label: '12-Rose', value: '12-Rose', color: '#ffffcc' },
@@ -134,4 +132,67 @@ export const classList = [
   { label: '11-Lily', value: '11-Lily', color: '#f2e6ff' },
   { label: '12-Lily', value: '12-Lily', color: '#e6f2ff' },
   { label: '9-Tulip', value: '9-Tulip', color: '#ffffcc' },
+]
+
+export const classData = [
+  {
+    id: 1,
+    name: '1-Lily',
+  },
+  {
+    id: 2,
+    name: '1-Rose',
+  },
+  {
+    id: 3,
+    name: '1-Tulip',
+  },
+  {
+    id: 4,
+    name: '2-Lily',
+  },
+  {
+    id: 5,
+    name: '2-Rose',
+  },
+  {
+    id: 6,
+    name: '2-Tulip',
+  },
+  {
+    id: 7,
+    name: '3-Lily',
+  },
+  {
+    id: 8,
+    name: '3-Rose',
+  },
+  {
+    id: 9,
+    name: '3-Tulip',
+  },
+  {
+    id: 10,
+    name: '4-Lily',
+  },
+  {
+    id: 11,
+    name: '4-Rose',
+  },
+  {
+    id: 12,
+    name: '4-Tulip',
+  },
+  {
+    id: 13,
+    name: '5-Lily',
+  },
+  {
+    id: 14,
+    name: '5-Rose',
+  },
+  {
+    id: 15,
+    name: '5-Tulip',
+  },
 ]
