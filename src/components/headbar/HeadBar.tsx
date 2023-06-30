@@ -21,6 +21,10 @@ import {
 } from '@chakra-ui/react'
 import { useRecoilState } from 'recoil'
 
+/**
+ * Top level navigation bar visible on all pages having fixed position
+ * @returns JSX.Element
+ */
 const HeadBar = () => {
   const [sidebarState, setSidebarState] = useRecoilState(sidebarAtom)
 

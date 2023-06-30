@@ -1,8 +1,5 @@
 'use client'
 
-/**
- * IMPORTS
- */
 import { createTeacherModalAtom } from '@/atom/createTeacherState'
 import {
   Button,
@@ -25,47 +22,12 @@ import Select, { ActionMeta, GroupBase, MultiValue, StylesConfig } from 'react-s
 import { classList } from '@/db/sample'
 import { errorToast, teacherAddedToast } from '../toast/toast'
 import { useEffect } from 'react'
+import selectStyles from '../select/styles/selectStyles'
 
 /**
- * Multi select styles
+ * Modal for creating/adding a new teacher
+ * @returns JSX.Element
  */
-const selectStyles: StylesConfig<ClassProps, true, GroupBase<ClassProps>> = {
-  control: (styles) => ({ ...styles, backgroundColor: 'white' }),
-  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-    return {
-      ...styles,
-      backgroundColor: isDisabled
-        ? undefined
-        : isSelected
-        ? data.color
-        : isFocused
-        ? '#E8E8E8'
-        : undefined,
-      cursor: isDisabled ? 'not-allowed' : 'default',
-
-      ':active': {
-        ...styles[':active'],
-        backgroundColor: '#E8E8E8',
-      },
-      ':hover': {
-        ...styles[':hover'],
-        backgroundColor: '#E8E8E8',
-      },
-    }
-  },
-  multiValue: (styles, { data }) => ({
-    ...styles,
-    backgroundColor: data.color,
-  }),
-  multiValueRemove: (styles, { data }) => ({
-    ...styles,
-    ':hover': {
-      backgroundColor: data.color,
-      color: '#555555',
-    },
-  }),
-}
-
 const CreateTeacherModal = () => {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
