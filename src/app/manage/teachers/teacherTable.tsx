@@ -1,6 +1,6 @@
 'use client'
 
-import { type TeacherData, editTeacherModalAtom } from '@/atom/editTeacherState'
+import { editTeacherModalAtom } from '@/atom/editTeacherState'
 import { multipleRowEditToastWarn } from '@/components/toast/toast'
 import { sampledata } from '@/db/sample'
 import { MuiTheme } from '@/theme/mui'
@@ -19,7 +19,7 @@ import {
 } from '@mui/x-data-grid'
 import { useSetRecoilState } from 'recoil'
 
-let selectedRows: TeacherData = []
+let selectedRows: Teacher[] = []
 
 export default function TeacherTable() {
   const rows = sampledata
@@ -35,9 +35,9 @@ export default function TeacherTable() {
       headerName: 'Classes',
       minWidth: 320,
       renderCell: (params: GridRenderCellParams) =>
-        params.value.map((item: string) => (
-          <Tag key={item} size={'sm'} bgColor={'green.300'} px={2} mr={2} borderRadius={'full'}>
-            <TagLabel>{item}</TagLabel>
+        params.value.map((cls: ClassProps) => (
+          <Tag key={cls.label} size={'sm'} bgColor={cls.color} px={2} mr={2} borderRadius={'full'}>
+            <TagLabel>{cls.value}</TagLabel>
           </Tag>
         )),
     },
@@ -79,7 +79,7 @@ function CustomToolbar() {
     } else {
       handleTeacherEditModal({
         open: true,
-        teacherData: [selectedRows[0]],
+        teacherData: selectedRows[0],
       })
     }
   }

@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
-import Select, { ActionMeta, GroupBase, MultiValue, StylesConfig } from 'react-select'
+import Select, { ActionMeta, MultiValue, StylesConfig } from 'react-select'
 import { classList } from '@/db/sample'
 import { errorToast, teacherAddedToast } from '../toast/toast'
 import { useEffect } from 'react'
@@ -36,7 +36,7 @@ const CreateTeacherModal = () => {
       firstName: '',
       lastName: '',
       email: '',
-      classes: [],
+      classes: undefined,
     },
   })
   useEffect(() => {

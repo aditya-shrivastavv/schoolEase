@@ -23,10 +23,10 @@ const EditTeacherModal = () => {
   const [{ open, teacherData }, setIsOpen] = useRecoilState(editTeacherModalAtom)
   const teacherProps: TeacherFormProps = useMemo(
     () => ({
-      firstName: teacherData[0].name.split(' ')[0],
-      lastName: teacherData[0].name.split(' ')[1] ?? '',
-      email: teacherData[0].email,
-      classes: teacherData[0].classes,
+      firstName: teacherData.name.split(' ')[0],
+      lastName: teacherData.name.split(' ')[1] ?? '',
+      email: teacherData.email,
+      classes: teacherData.classes,
     }),
     [teacherData]
   )
