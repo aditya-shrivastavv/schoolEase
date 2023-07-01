@@ -1,0 +1,16 @@
+{
+  "id": "mig_cig3llfr2gr59c76hb60",
+  "parentID": "mig_cifvk97r2gr59c76glg0",
+  "checksum": "1:7f3ffceb67112a56b9cc1ccbce367ddd34db37528ef2ced18be1a67163bc32f3",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "class",
+          "type": "string"
+        },
+        "table": "classes"
+      }
+    }
+  ]
+}

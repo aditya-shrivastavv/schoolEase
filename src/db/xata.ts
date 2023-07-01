@@ -26,6 +26,7 @@ const tables = [
       { name: "name", type: "string", unique: true },
       { name: "section", type: "string" },
       { name: "colorCode", type: "string" },
+      { name: "class", type: "string" },
     ],
   },
 ] as const;
