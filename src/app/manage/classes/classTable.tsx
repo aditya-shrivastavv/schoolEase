@@ -33,7 +33,7 @@ export default function ClassTable() {
         <Link
           as={NextLink}
           href={`/manage/classes/${params.value}`}
-          onClick={(e) => e.stopPropagation}
+          onClick={(e) => e.stopPropagation()}
           _hover={{ textDecoration: 'underline' }}
         >
           {params.value}

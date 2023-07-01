@@ -23,8 +23,15 @@ type Props = {
 const page = ({ params }: Props) => {
   return (
     <Box>
-      <Flex gap={4}>
-        <Box bgColor={'secondary.A100'} borderRadius={'lg'} p={4} flexBasis={'60%'}>
+      <Flex gap={5}>
+        <Box
+          bgColor={'secondary.A100'}
+          border={'1px solid'}
+          borderRadius={'lg'}
+          p={4}
+          flexBasis={'60%'}
+          borderColor={'secondary.200'}
+        >
           <Heading size={'sm'} px={4} py={2}>
             Class details
           </Heading>
@@ -71,7 +78,14 @@ const page = ({ params }: Props) => {
             </Table>
           </TableContainer>
         </Box>
-        <Box bgColor={'secondary.A100'} borderRadius={'lg'} p={4} flexBasis={'40%'}>
+        <Box
+          bgColor={'secondary.A100'}
+          borderRadius={'lg'}
+          border={'1px solid'}
+          borderColor={'secondary.200'}
+          p={4}
+          flexBasis={'40%'}
+        >
           <Heading size={'sm'} px={4} py={2}>
             Quick Actions
           </Heading>
