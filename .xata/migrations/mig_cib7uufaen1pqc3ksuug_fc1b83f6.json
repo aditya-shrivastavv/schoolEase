@@ -1,0 +1,16 @@
+{
+  "id": "mig_cib7uufaen1pqc3ksuug",
+  "parentID": "mig_cib7urjuv4sg2jb6gth0",
+  "checksum": "1:fc1b83f63cde0f2ab6abb0773a694a5f91994a8bf23670e2645b6e3869cb3206",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "classes",
+          "type": "multiple"
+        },
+        "table": "teachers"
+      }
+    }
+  ]
+}

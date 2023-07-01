@@ -1,0 +1,16 @@
+{
+  "id": "mig_cib7un7aen1pqc3ksutg",
+  "parentID": "mig_cib7uhjuv4sg2jb6gtg0",
+  "checksum": "1:92463f197355a88d18f436f0de48e0c937082046814ffe2eb243244055f35dc8",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "dob",
+          "type": "datetime"
+        },
+        "table": "teachers"
+      }
+    }
+  ]
+}

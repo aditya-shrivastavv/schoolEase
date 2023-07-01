@@ -1,0 +1,18 @@
+{
+  "id": "mig_cib7uhjuv4sg2jb6gtg0",
+  "parentID": "mig_cib7u8oj4fk63q3405qg",
+  "checksum": "1:713cea5d7b4566161dbf51350eab41f2ffc8d0fa3b3806de42bb60718854a5d2",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "email",
+          "type": "email",
+          "notNull": true,
+          "defaultValue": "someone@example.com"
+        },
+        "table": "teachers"
+      }
+    }
+  ]
+}

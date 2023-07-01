@@ -17,9 +17,15 @@ const tables = [
         notNull: true,
         defaultValue: "someone@example.com",
       },
-      { name: "dob", type: "datetime" },
-      { name: "phone", type: "string" },
       { name: "classes", type: "multiple" },
+    ],
+  },
+  {
+    name: "classes",
+    columns: [
+      { name: "name", type: "string", unique: true },
+      { name: "section", type: "string" },
+      { name: "colorCode", type: "string" },
     ],
   },
 ] as const;
@@ -30,8 +36,12 @@ export type InferredTypes = SchemaInference<SchemaTables>;
 export type Teachers = InferredTypes["teachers"];
 export type TeachersRecord = Teachers & XataRecord;
 
+export type Classes = InferredTypes["classes"];
+export type ClassesRecord = Classes & XataRecord;
+
 export type DatabaseSchema = {
   teachers: TeachersRecord;
+  classes: ClassesRecord;
 };
 
 const DatabaseClient = buildClient();

@@ -1,0 +1,13 @@
+{
+  "id": "mig_cift9rvr2gr59c76gc70",
+  "parentID": "mig_cift9mnr2gr59c76gc60",
+  "checksum": "1:8915f40800245da94ddb625a671a10704fd0ba3cd1049e870ea4ad144f5e88a5",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "phone",
+        "table": "teachers"
+      }
+    }
+  ]
+}

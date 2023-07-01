@@ -1,0 +1,11 @@
+{
+  "id": "mig_cib7tpoj4fk63q3405pg",
+  "checksum": "1:6a6838be331a833ee5b0bc009df4f767ea25fdcc3599201bbe87292376ae890b",
+  "operations": [
+    {
+      "addTable": {
+        "table": "teachers"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "mig_cift9mnr2gr59c76gc60",
+  "parentID": "mig_cib7uufaen1pqc3ksuug",
+  "checksum": "1:fbd626809ceb6938f00ff127803e8e88a447c675b9528851ce098a1ee53dd666",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "dob",
+        "table": "teachers"
+      }
+    }
+  ]
+}

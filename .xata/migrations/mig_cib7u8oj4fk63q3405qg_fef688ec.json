@@ -1,0 +1,18 @@
+{
+  "id": "mig_cib7u8oj4fk63q3405qg",
+  "parentID": "mig_cib7tpoj4fk63q3405pg",
+  "checksum": "1:fef688ec1d8c600e4b86ac3459d8b1d1a99db4f5e83ea16375a52593456cbbe0",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "N/A"
+        },
+        "table": "teachers"
+      }
+    }
+  ]
+}

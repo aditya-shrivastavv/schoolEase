@@ -1,0 +1,16 @@
+{
+  "id": "mig_cib7urjuv4sg2jb6gth0",
+  "parentID": "mig_cib7un7aen1pqc3ksutg",
+  "checksum": "1:d35ffe99da7fe67eb18ee73d749d293e986b7ac05c985f02e9ee94916c25997c",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "phone",
+          "type": "string"
+        },
+        "table": "teachers"
+      }
+    }
+  ]
+}
