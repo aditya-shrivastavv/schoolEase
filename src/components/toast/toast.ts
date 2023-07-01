@@ -1,31 +1,31 @@
-import { Toast, useToast } from '@chakra-ui/react'
+import { Toast } from '@chakra-ui/react'
 
-export function teacherAddedToast(toast: typeof Toast) {
+export function teacherAddedToast(toast: typeof Toast, message: string) {
   toast({
     title: 'Success!',
-    description: "We've added the teacher for you.",
+    description: message,
     status: 'success',
-    duration: 5000,
+    duration: 4000,
     position: 'top-right',
     variant: 'top-accent',
     isClosable: true,
   })
 }
-export function errorToast(toast: typeof Toast) {
+export function errorToast(toast: typeof Toast, message: string) {
   toast({
     title: 'Error!',
-    description: 'Some Unexpected error occured.',
+    description: message,
     status: 'error',
-    duration: 5000,
+    duration: 4000,
     position: 'top-right',
     variant: 'top-accent',
     isClosable: true,
   })
 }
-export function multipleRowEditToastWarn(toast: typeof Toast) {
+export function multipleRowEditToastWarn(toast: typeof Toast, message: string) {
   toast({
-    title: 'Invalid Operation!',
-    description: 'Please select a single row to edit.',
+    title: 'Warning!',
+    description: message,
     status: 'warning',
     duration: 4000,
     position: 'top-right',

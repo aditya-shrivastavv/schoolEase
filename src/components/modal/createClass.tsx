@@ -37,11 +37,11 @@ const CreateClassModal = (props: Props) => {
   })
   useEffect(() => {
     if (formState.isSubmitted && formState.isSubmitSuccessful) {
-      teacherAddedToast(toast)
+      teacherAddedToast(toast, 'Class added successfully')
       reset()
     }
     if (formState.isSubmitted && !formState.isSubmitSuccessful) {
-      errorToast(toast)
+      errorToast(toast, 'Error adding class')
     }
   }, [formState.isSubmitted, formState.isSubmitSuccessful, reset, toast])
   function onSubmit(data: any) {

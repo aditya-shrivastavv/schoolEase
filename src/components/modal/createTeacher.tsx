@@ -41,11 +41,11 @@ const CreateTeacherModal = () => {
   })
   useEffect(() => {
     if (formState.isSubmitted && formState.isSubmitSuccessful) {
-      teacherAddedToast(toast)
+      teacherAddedToast(toast, 'Teacher added successfully')
       reset()
     }
     if (formState.isSubmitted && !formState.isSubmitSuccessful) {
-      errorToast(toast)
+      errorToast(toast, 'Error adding teacher')
     }
   }, [formState.isSubmitted, formState.isSubmitSuccessful, reset, toast])
 

@@ -75,7 +75,7 @@ function CustomToolbar() {
   const handleTeacherEditModal = useSetRecoilState(editTeacherModalAtom)
   function handleEditModal() {
     if (selectedRows.length !== 1) {
-      multipleRowEditToastWarn(toast)
+      multipleRowEditToastWarn(toast, 'You can only edit one teacher at a time.')
     } else {
       handleTeacherEditModal({
         open: true,

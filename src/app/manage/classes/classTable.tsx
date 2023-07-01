@@ -73,7 +73,7 @@ function CustomToolbar() {
   const toast = useToast()
   function changeMyName() {
     if (selectedRows.length !== 1) {
-      multipleRowEditToastWarn(toast)
+      multipleRowEditToastWarn(toast, "You can't edit multiple rows at once")
     } else {
       // do something
     }
