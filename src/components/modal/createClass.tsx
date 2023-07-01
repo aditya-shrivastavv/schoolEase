@@ -20,6 +20,7 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
 import { errorToast, teacherAddedToast } from '../toast/toast'
+import { createClass } from '@/actions/classActions'
 
 type Props = {}
 const classNameRegex = /^\d+-[A-Z][a-z]*$/
@@ -35,6 +36,7 @@ const CreateClassModal = (props: Props) => {
       name: '',
     },
   })
+
   useEffect(() => {
     if (formState.isSubmitted && formState.isSubmitSuccessful) {
       teacherAddedToast(toast, 'Class added successfully')
@@ -44,17 +46,21 @@ const CreateClassModal = (props: Props) => {
       errorToast(toast, 'Error adding class')
     }
   }, [formState.isSubmitted, formState.isSubmitSuccessful, reset, toast])
-  function onSubmit(data: any) {
+
+  async function onSubmit(data: any) {
     if (!isValidClassName(data.name)) {
       return new Promise((resolve) => {
         resolve(setError('name', { message: 'Invalid class name' }))
       })
     }
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(console.log(data))
-      }, 2000)
-    })
+    try {
+      const status = await createClass(data)
+      status.id
+        ? status.id
+        : new Promise((resolve) => resolve(setError('name', { message: 'Error Creating Class' })))
+    } catch (error) {
+      new Promise((resolve) => resolve(setError('name', { message: 'Error Creating Class' })))
+    }
   }
 
   return (
