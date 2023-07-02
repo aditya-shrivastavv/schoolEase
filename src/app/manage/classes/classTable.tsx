@@ -4,8 +4,8 @@ import { getAllClasses } from '@/actions/classActions'
 import { multipleRowEditToastWarn } from '@/components/toast/toast'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon } from '@chakra-ui/icons'
-import { Button, useToast } from '@chakra-ui/react'
-import { ThemeProvider } from '@mui/material'
+import { Button, Skeleton, useToast } from '@chakra-ui/react'
+import { LinearProgress, ThemeProvider } from '@mui/material'
 import {
   DataGrid,
   GridToolbarColumnsButton,
@@ -23,13 +23,16 @@ let selectedRows = []
  * Table for displaying all classes. Uses MUI DataGrid.
  */
 export default function ClassTable() {
+  const [loading, setLoading] = useState(true)
   const [rows, setRows] = useState<ClassInfo[]>([])
 
   // Fetching Classes in useEffect
   useEffect(() => {
     const getRows = async () => {
+      setLoading(true)
       const data = await getAllClasses()
       setRows(data as ClassInfo[])
+      setLoading(false)
     }
     getRows()
   }, [])
@@ -54,7 +57,9 @@ export default function ClassTable() {
           pageSizeOptions={[10, 25, 50, 100]}
           slots={{
             toolbar: CustomToolbar,
+            loadingOverlay: LinearProgress,
           }}
+          loading={!rows.length && loading}
         />
       </ThemeProvider>
     </div>
