@@ -35,7 +35,7 @@ export default function TeacherTable() {
       headerName: 'Classes',
       minWidth: 320,
       renderCell: (params: GridRenderCellParams) =>
-        params.value.map((cls: ClassProps) => (
+        params.value.map((cls: ClassData) => (
           <Tag key={cls.label} size={'sm'} bgColor={cls.color} px={2} mr={2} borderRadius={'full'}>
             <TagLabel>{cls.value}</TagLabel>
           </Tag>

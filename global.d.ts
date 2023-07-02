@@ -6,18 +6,12 @@ type Teacher = {
   id: number
   name: string
   email: string
-  classes: ClassProps[]
+  classes: ClassData[]
 }
 
 type TeacherFormProps = {
   firstName: string
   lastName: string
   email: string
-  classes: ClassProps[]
-}
-
-type ClassProps = {
-  label: string
-  value: string
-  color: string
+  classes: ClassData[]
 }

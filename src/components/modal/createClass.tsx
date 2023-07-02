@@ -1,3 +1,5 @@
+'use client'
+
 import { createClassModalAtom } from '@/atom/createClassState'
 import {
   Button,
@@ -22,21 +24,25 @@ import { useRecoilState } from 'recoil'
 import { errorToast, teacherAddedToast } from '../toast/toast'
 import { createClass } from '@/actions/classActions'
 
-type Props = {}
-const classNameRegex = /^\d+-[A-Z][a-z]*$/
 const isValidClassName = (className: string) => {
-  return classNameRegex.test(className)
+  return className.includes('-')
 }
 
-const CreateClassModal = (props: Props) => {
+/**
+ * Modal for creating a new class.
+ */
+export default function CreateClassModal() {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createClassModalAtom)
+
+  // HOOK FORM
   const { register, handleSubmit, formState, reset, setError } = useForm({
     defaultValues: {
       name: '',
     },
   })
 
+  // TODO: Test showing toast in onSubmit function.
   useEffect(() => {
     if (formState.isSubmitted && formState.isSubmitSuccessful) {
       teacherAddedToast(toast, 'Class added successfully')
@@ -47,19 +53,22 @@ const CreateClassModal = (props: Props) => {
     }
   }, [formState.isSubmitted, formState.isSubmitSuccessful, reset, toast])
 
-  async function onSubmit(data: any) {
-    if (!isValidClassName(data.name)) {
-      return new Promise((resolve) => {
-        resolve(setError('name', { message: 'Invalid class name' }))
-      })
+  async function onSubmit(formData: { name: string }) {
+    if (!isValidClassName(formData.name)) {
+      setError('name', { message: 'Invalid class Name, name must include a dash.' })
+      return
     }
     try {
-      const status = await createClass(data)
-      status.id
-        ? status.id
-        : new Promise((resolve) => resolve(setError('name', { message: 'Error Creating Class' })))
+      const status = await createClass(formData)
+      if (status) return status
+      return new Promise((resolve) =>
+        resolve(setError('name', { message: 'Error Creating Class' }))
+      )
     } catch (error) {
-      new Promise((resolve) => resolve(setError('name', { message: 'Error Creating Class' })))
+      return new Promise(
+        (resolve) => resolve(setError('name', { message: 'Error Creating Class In Database.' }))
+        // TODO: Custom error message for duplicate class name
+      )
     }
   }
 
@@ -112,5 +121,3 @@ const CreateClassModal = (props: Props) => {
     </>
   )
 }
-
-export default CreateClassModal

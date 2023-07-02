@@ -1,46 +1,38 @@
 'use client'
 
-import React from 'react'
+import { getAllClasses } from '@/actions/classActions'
+import { multipleRowEditToastWarn } from '@/components/toast/toast'
+import { MuiTheme } from '@/theme/mui'
+import { DeleteIcon } from '@chakra-ui/icons'
+import { Button, useToast } from '@chakra-ui/react'
 import { ThemeProvider } from '@mui/material'
 import {
   DataGrid,
-  GridColDef,
-  GridRenderCellParams,
   GridToolbarColumnsButton,
   GridToolbarContainer,
   GridToolbarDensitySelector,
   GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
-import { classData } from '@/db/sample'
-import { MuiTheme } from '@/theme/mui'
-import { Button, Link, useToast } from '@chakra-ui/react'
-import { DeleteIcon } from '@chakra-ui/icons'
-import { multipleRowEditToastWarn } from '@/components/toast/toast'
-import NextLink from 'next/link'
+import { useEffect, useState } from 'react'
+import columns from './columns'
 
-let selectedRows: typeof classData = []
+let selectedRows = []
 
+/**
+ * Table for displaying all classes. Uses MUI DataGrid.
+ */
 export default function ClassTable() {
-  const rows = classData
-  const columns: GridColDef[] = [
-    {
-      field: 'name',
-      headerName: 'Class',
-      minWidth: 350,
-      flex: 1,
-      renderCell: (params: GridRenderCellParams) => (
-        <Link
-          as={NextLink}
-          href={`/manage/classes/${params.value}`}
-          onClick={(e) => e.stopPropagation()}
-          _hover={{ textDecoration: 'underline' }}
-        >
-          {params.value}
-        </Link>
-      ),
-    },
-  ]
+  const [rows, setRows] = useState<ClassInfo[]>([])
+
+  // Fetching Classes in useEffect
+  useEffect(() => {
+    const getRows = async () => {
+      const data = await getAllClasses()
+      setRows(data as ClassInfo[])
+    }
+    getRows()
+  }, [])
 
   return (
     <div style={{ width: '100%' }}>
@@ -69,6 +61,9 @@ export default function ClassTable() {
   )
 }
 
+/**
+ * @returns Custom toolbar for the table.
+ */
 function CustomToolbar() {
   const toast = useToast()
   function changeMyName() {

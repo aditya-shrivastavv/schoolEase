@@ -7,7 +7,7 @@ const xata = getXataClient()
 
 /**
  * Create new class in database.
- * @param {string} data
+ * @param {string} record.id - id of the class
  * @returns
  */
 export async function createClass(data: { name: string }) {
@@ -18,11 +18,17 @@ export async function createClass(data: { name: string }) {
     colorCode: getRandomColor(),
   }
   const record = xata.db.classes.create(model)
-  return record
+  return (await record).id
 }
 
+/**
+ * Get id and name of all classes from database.
+ * @returns {{id: string, name: string}[]} - Array of all classes(as objects)
+ */
 export async function getAllClasses() {
-  const records = xata.db.classes.select(['id', 'name']).getAll()
-  return JSON.parse(JSON.stringify(records))
-  // Only plain objects can be passed to Client Components from Server Components. Classes or other objects with methods are not supported.
+  const records = xata.db.classes.getAll()
+  return (await records).map((record) => ({
+    id: record.id,
+    name: record.name,
+  }))
 }
