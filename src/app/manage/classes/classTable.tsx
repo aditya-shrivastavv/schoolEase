@@ -4,7 +4,7 @@ import { getAllClasses } from '@/actions/classActions'
 import { multipleRowEditToastWarn } from '@/components/toast/toast'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon } from '@chakra-ui/icons'
-import { Button, Skeleton, useToast } from '@chakra-ui/react'
+import { Button, useToast } from '@chakra-ui/react'
 import { LinearProgress, ThemeProvider } from '@mui/material'
 import {
   DataGrid,
