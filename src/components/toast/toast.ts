@@ -1,6 +1,6 @@
 import { Toast } from '@chakra-ui/react'
 
-export function teacherAddedToast(toast: typeof Toast, message: string) {
+export function successToast(toast: typeof Toast, message: string) {
   toast({
     title: 'Success!',
     description: message,
@@ -22,7 +22,7 @@ export function errorToast(toast: typeof Toast, message: string) {
     isClosable: true,
   })
 }
-export function multipleRowEditToastWarn(toast: typeof Toast, message: string) {
+export function warningToast(toast: typeof Toast, message: string) {
   toast({
     title: 'Warning!',
     description: message,

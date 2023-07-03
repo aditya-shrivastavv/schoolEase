@@ -1,7 +1,7 @@
 'use client'
 
 import { getAllClasses } from '@/actions/classActions'
-import { multipleRowEditToastWarn } from '@/components/toast/toast'
+import { deleteClass as deleteClassDb } from '@/actions/classActions'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { Button, useToast } from '@chakra-ui/react'
@@ -16,10 +16,12 @@ import {
 } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
 import columns from './columns'
-import { classCreatedAtom } from '@/atom/refresh/classCreated'
-import { useRecoilValue } from 'recoil'
+import { classTableNeedsRefresh } from '@/atom/refresh/classTableNeedsRefresh'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { errorToast, successToast } from '@/components/toast/toast'
 
-let selectedRows = []
+// gets value automatically.
+let selectedRows: any = []
 
 /**
  * Table for displaying all classes. Uses MUI DataGrid.
@@ -27,7 +29,7 @@ let selectedRows = []
 export default function ClassTable() {
   const [loading, setLoading] = useState(true)
   const [rows, setRows] = useState<ClassInfo[]>([])
-  const refresh = useRecoilValue(classCreatedAtom)
+  const refresh = useRecoilValue(classTableNeedsRefresh)
 
   // Fetching Classes in useEffect
   useEffect(() => {
@@ -74,12 +76,19 @@ export default function ClassTable() {
  */
 function CustomToolbar() {
   const toast = useToast()
-  function changeMyName() {
-    if (selectedRows.length !== 1) {
-      multipleRowEditToastWarn(toast, "You can't edit multiple rows at once")
-    } else {
-      // do something
+  const setRefresh = useSetRecoilState(classTableNeedsRefresh)
+  const [deletingClass, setDeletingClass] = useState(false)
+
+  async function deleteClass() {
+    if (!selectedRows.length) {
+      errorToast(toast, 'Please select at least one class to delete.')
+      return
     }
+    setDeletingClass(true)
+    const res = await deleteClassDb(selectedRows)
+    setRefresh((prev) => ({ ...prev, count: prev.count + 1 }))
+    setDeletingClass(false)
+    successToast(toast, `Successfully deleted ${res.length} classes.`)
   }
 
   return (
@@ -95,6 +104,8 @@ function CustomToolbar() {
         borderRadius={'md'}
         p={'4px 5px'}
         _hover={{ color: 'red.400', bgColor: 'red.50' }}
+        isLoading={deletingClass}
+        onClick={deleteClass}
       >
         DELETE
       </Button>

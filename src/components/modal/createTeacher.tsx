@@ -20,7 +20,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
 import Select, { ActionMeta, MultiValue, StylesConfig } from 'react-select'
 import { classList } from '@/db/sample'
-import { errorToast, teacherAddedToast } from '../toast/toast'
+import { errorToast, successToast } from '../toast/toast'
 import { useEffect } from 'react'
 import selectStyles from '../select/styles/selectStyles'
 
@@ -41,7 +41,7 @@ const CreateTeacherModal = () => {
   })
   useEffect(() => {
     if (formState.isSubmitted && formState.isSubmitSuccessful) {
-      teacherAddedToast(toast, 'Teacher added successfully')
+      successToast(toast, 'Teacher added successfully')
       reset()
     }
     if (formState.isSubmitted && !formState.isSubmitSuccessful) {

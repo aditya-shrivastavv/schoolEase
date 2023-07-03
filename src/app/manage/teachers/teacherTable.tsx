@@ -1,7 +1,7 @@
 'use client'
 
 import { editTeacherModalAtom } from '@/atom/editTeacherState'
-import { multipleRowEditToastWarn } from '@/components/toast/toast'
+import { warningToast } from '@/components/toast/toast'
 import { sampledata } from '@/db/sample'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
@@ -75,7 +75,7 @@ function CustomToolbar() {
   const handleTeacherEditModal = useSetRecoilState(editTeacherModalAtom)
   function handleEditModal() {
     if (selectedRows.length !== 1) {
-      multipleRowEditToastWarn(toast, 'You can only edit one teacher at a time.')
+      warningToast(toast, 'You can only edit one teacher at a time.')
     } else {
       handleTeacherEditModal({
         open: true,

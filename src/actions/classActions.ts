@@ -2,7 +2,6 @@
 
 import { Classes, getXataClient } from '@/db/xata'
 import getRandomColor from '@/lib/color/getRandomColor'
-import { revalidatePath } from 'next/cache'
 
 const xata = getXataClient()
 
@@ -19,7 +18,6 @@ export async function createClass(data: { name: string }) {
     colorCode: getRandomColor(),
   }
   const record = await xata.db.classes.create(model)
-  revalidatePath('/manage/classes')
   return record.id
 }
 
@@ -33,4 +31,10 @@ export async function getAllClasses() {
     id: record.id,
     name: record.name,
   }))
+}
+
+export async function deleteClass(data: ClassInfo[]) {
+  const ids = data.map((record) => record.id)
+  const res = await xata.db.classes.delete(ids)
+  return res.map((record) => record?.id)
 }

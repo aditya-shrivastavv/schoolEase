@@ -21,9 +21,9 @@ import {
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { errorToast, teacherAddedToast } from '../toast/toast'
+import { errorToast, successToast } from '../toast/toast'
 import { createClass } from '@/actions/classActions'
-import { classCreatedAtom } from '@/atom/refresh/classCreated'
+import { classTableNeedsRefresh } from '@/atom/refresh/classTableNeedsRefresh'
 
 const isValidClassName = (className: string) => {
   return className.includes('-') && !className.startsWith('-') && !className.endsWith('-')
@@ -35,7 +35,7 @@ const isValidClassName = (className: string) => {
 export default function CreateClassModal() {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createClassModalAtom)
-  const setRefresh = useSetRecoilState(classCreatedAtom)
+  const setRefresh = useSetRecoilState(classTableNeedsRefresh)
 
   // HOOK FORM
   const { register, handleSubmit, formState, reset, setError, setFocus } = useForm({
@@ -62,7 +62,7 @@ export default function CreateClassModal() {
       const status = await createClass(formData)
       if (status) {
         setRefresh((prev) => ({ ...prev, count: prev.count + 1 }))
-        teacherAddedToast(toast, 'Class added successfully')
+        successToast(toast, 'Class added successfully')
         reset()
         return status
       }
