@@ -26,7 +26,7 @@ import { createClass } from '@/actions/classActions'
 import { classCreatedAtom } from '@/atom/refresh/classCreated'
 
 const isValidClassName = (className: string) => {
-  return className.includes('-')
+  return className.includes('-') && !className.startsWith('-') && !className.endsWith('-')
 }
 
 /**
@@ -38,22 +38,20 @@ export default function CreateClassModal() {
   const setRefresh = useSetRecoilState(classCreatedAtom)
 
   // HOOK FORM
-  const { register, handleSubmit, formState, reset, setError } = useForm({
+  const { register, handleSubmit, formState, reset, setError, setFocus } = useForm({
     defaultValues: {
       name: '',
     },
   })
 
-  // TODO: Test showing toast in onSubmit function.
   useEffect(() => {
-    if (formState.isSubmitted && formState.isSubmitSuccessful) {
-      teacherAddedToast(toast, 'Class added successfully')
-      reset()
+    if (open) {
+      // because it takes a while for the modal to open, we need to wait a bit before setting focus
+      setTimeout(() => {
+        setFocus('name')
+      }, 100)
     }
-    if (formState.isSubmitted && !formState.isSubmitSuccessful) {
-      errorToast(toast, 'Error adding class')
-    }
-  }, [formState.isSubmitted, formState.isSubmitSuccessful, reset, toast])
+  }, [open, setFocus])
 
   async function onSubmit(formData: { name: string }) {
     if (!isValidClassName(formData.name)) {
@@ -64,11 +62,18 @@ export default function CreateClassModal() {
       const status = await createClass(formData)
       if (status) {
         setRefresh((prev) => ({ ...prev, count: prev.count + 1 }))
+        teacherAddedToast(toast, 'Class added successfully')
+        reset()
         return status
       }
-      return new Promise((resolve) =>
-        resolve(setError('name', { message: 'Error Creating Class' }))
-      )
+      return new Promise((resolve) => {
+        errorToast(toast, 'Error adding class')
+        resolve(
+          setError('name', {
+            message: 'Error Creating Class: Maybe a class with that name already exists?',
+          })
+        )
+      })
     } catch (error) {
       return new Promise(
         (resolve) => resolve(setError('name', { message: 'Error Creating Class In Database.' }))
