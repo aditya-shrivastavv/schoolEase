@@ -3,7 +3,7 @@ import { GroupBase, StylesConfig } from 'react-select'
 /**
  * Custom styles for react-select component
  */
-const selectStyles: StylesConfig<ClassData, true, GroupBase<ClassData>> = {
+const selectStyles: StylesConfig<ClassSelectData, true, GroupBase<ClassSelectData>> = {
   control: (styles) => ({ ...styles, backgroundColor: 'white' }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     return {
