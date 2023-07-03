@@ -31,14 +31,26 @@ import selectStyles from '../select/styles/selectStyles'
 const CreateTeacherModal = () => {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
-  const { register, handleSubmit, formState, reset, control } = useForm<TeacherFormProps>({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      classes: undefined,
-    },
-  })
+  const { register, handleSubmit, formState, reset, control, setFocus } = useForm<TeacherFormProps>(
+    {
+      defaultValues: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        classes: undefined,
+      },
+    }
+  )
+
+  useEffect(() => {
+    if (open) {
+      // because it takes a while for the modal to open, we need to wait a bit before setting focus
+      setTimeout(() => {
+        setFocus('firstName')
+      }, 100)
+    }
+  }, [open, setFocus])
+
   useEffect(() => {
     if (formState.isSubmitted && formState.isSubmitSuccessful) {
       successToast(toast, 'Teacher added successfully')

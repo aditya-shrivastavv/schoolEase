@@ -1,7 +1,3 @@
-/**
- * Comman fields for teacher edit and create form
- */
-
 type Teacher = {
   id: number
   name: string
