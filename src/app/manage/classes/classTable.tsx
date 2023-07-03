@@ -16,6 +16,8 @@ import {
 } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
 import columns from './columns'
+import { classCreatedAtom } from '@/atom/refresh/classCreated'
+import { useRecoilValue } from 'recoil'
 
 let selectedRows = []
 
@@ -25,6 +27,7 @@ let selectedRows = []
 export default function ClassTable() {
   const [loading, setLoading] = useState(true)
   const [rows, setRows] = useState<ClassInfo[]>([])
+  const refresh = useRecoilValue(classCreatedAtom)
 
   // Fetching Classes in useEffect
   useEffect(() => {
@@ -35,7 +38,7 @@ export default function ClassTable() {
       setLoading(false)
     }
     getRows()
-  }, [])
+  }, [refresh])
 
   return (
     <div style={{ width: '100%' }}>

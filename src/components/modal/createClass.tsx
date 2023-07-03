@@ -20,9 +20,10 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { errorToast, teacherAddedToast } from '../toast/toast'
 import { createClass } from '@/actions/classActions'
+import { classCreatedAtom } from '@/atom/refresh/classCreated'
 
 const isValidClassName = (className: string) => {
   return className.includes('-')
@@ -34,6 +35,7 @@ const isValidClassName = (className: string) => {
 export default function CreateClassModal() {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createClassModalAtom)
+  const setRefresh = useSetRecoilState(classCreatedAtom)
 
   // HOOK FORM
   const { register, handleSubmit, formState, reset, setError } = useForm({
@@ -60,7 +62,10 @@ export default function CreateClassModal() {
     }
     try {
       const status = await createClass(formData)
-      if (status) return status
+      if (status) {
+        setRefresh((prev) => ({ ...prev, count: prev.count + 1 }))
+        return status
+      }
       return new Promise((resolve) =>
         resolve(setError('name', { message: 'Error Creating Class' }))
       )
