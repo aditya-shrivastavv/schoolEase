@@ -2,7 +2,7 @@ import { atom } from 'recoil'
 
 export type EditTeacherModalProps = {
   open: boolean
-  teacherData: Teacher
+  teacherData: TeacherFormData
 }
 
 const defaultModalState: EditTeacherModalProps = {

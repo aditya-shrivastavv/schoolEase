@@ -1,8 +1,8 @@
 'use client'
 
+import { getAllTeachers } from '@/actions/teacherActions'
 import { editTeacherModalAtom } from '@/atom/editTeacherState'
 import { warningToast } from '@/components/toast/toast'
-import { sampledata } from '@/db/sample'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Button, Tag, TagLabel, useToast } from '@chakra-ui/react'
@@ -17,12 +17,22 @@ import {
   GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
+import { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 
-let selectedRows: Teacher[] = []
+let selectedRows: TeacherFormData[] = []
 
 export default function TeacherTable() {
-  const rows = sampledata
+  const [rows, setRows] = useState<TeacherFormData[]>([])
+
+  useEffect(() => {
+    const getRows = async () => {
+      const data = await getAllTeachers()
+      setRows(data)
+    }
+    getRows()
+  }, [])
+
   const columns: GridColDef[] = [
     {
       field: 'name',

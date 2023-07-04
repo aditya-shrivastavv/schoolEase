@@ -23,6 +23,7 @@ import { classList } from '@/db/sample'
 import { errorToast, successToast } from '../toast/toast'
 import { useEffect } from 'react'
 import selectStyles from '../select/styles/selectStyles'
+import { createTeacher } from '@/actions/teacherActions'
 
 /**
  * Modal for creating/adding a new teacher
@@ -31,16 +32,15 @@ import selectStyles from '../select/styles/selectStyles'
 const CreateTeacherModal = () => {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
-  const { register, handleSubmit, formState, reset, control, setFocus } = useForm<TeacherFormProps>(
-    {
+  const { register, handleSubmit, formState, reset, control, setFocus, setError } =
+    useForm<TeacherFormProps>({
       defaultValues: {
         firstName: '',
         lastName: '',
         email: '',
         classes: undefined,
       },
-    }
-  )
+    })
 
   useEffect(() => {
     if (open) {
@@ -51,22 +51,17 @@ const CreateTeacherModal = () => {
     }
   }, [open, setFocus])
 
-  useEffect(() => {
-    if (formState.isSubmitted && formState.isSubmitSuccessful) {
-      successToast(toast, 'Teacher added successfully')
-      reset()
-    }
-    if (formState.isSubmitted && !formState.isSubmitSuccessful) {
+  async function onSubmit(data: TeacherFormProps) {
+    try {
+      const status = await createTeacher(data)
+      if (status) {
+        successToast(toast, 'Teacher added successfully')
+        reset()
+      }
+    } catch (err) {
       errorToast(toast, 'Error adding teacher')
+      console.error(err)
     }
-  }, [formState.isSubmitted, formState.isSubmitSuccessful, reset, toast])
-
-  function onSubmit(data: any) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(console.log(data))
-      }, 2000)
-    })
   }
 
   return (
