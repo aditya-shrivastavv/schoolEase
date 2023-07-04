@@ -2,4 +2,4 @@
 - [ ] Add Tooltip wherever necessary.
 - [x] learn and apply useMemo
 - [ ] add a confirmation popup on adding or deletion of some important information.
-- [ ] async select is not sorting options based on the given text.
+- [x] async select is not sorting options based on the given text.

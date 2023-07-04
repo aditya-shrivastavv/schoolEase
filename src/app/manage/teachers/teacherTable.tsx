@@ -6,7 +6,8 @@ import { teacherTableNeedsRefresh } from '@/atom/refresh/teacherTableNeedsRefres
 import { warningToast } from '@/components/toast/toast'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { Button, Tag, TagLabel, useToast } from '@chakra-ui/react'
+import { Button, Link, Tag, TagLabel, useToast } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { LinearProgress, ThemeProvider } from '@mui/material'
 import {
   DataGrid,
@@ -51,9 +52,16 @@ export default function TeacherTable() {
       minWidth: 320,
       renderCell: (params: GridRenderCellParams) =>
         params.value.map((cls: ClassSelectData) => (
-          <Tag key={cls.label} size={'sm'} bgColor={cls.color} px={2} mr={2} borderRadius={'full'}>
-            <TagLabel>{cls.value}</TagLabel>
-          </Tag>
+          <Link
+            as={NextLink}
+            key={cls.label}
+            href={`/manage/classes/${cls.label}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Tag size={'sm'} bgColor={cls.color} px={2} mr={2} borderRadius={'full'}>
+              <TagLabel>{cls.value}</TagLabel>
+            </Tag>
+          </Link>
         )),
     },
   ]

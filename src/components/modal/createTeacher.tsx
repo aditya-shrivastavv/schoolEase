@@ -27,6 +27,7 @@ import selectStyles from '../select/styles/selectStyles'
 import { createTeacher } from '@/actions/teacherActions'
 import { getClassSelectOptions } from '@/actions/classActions'
 import { teacherTableNeedsRefresh } from '@/atom/refresh/teacherTableNeedsRefresh'
+import makeAnimated from 'react-select/animated'
 
 /**
  * Modal for creating/adding a new teacher
@@ -36,6 +37,7 @@ const CreateTeacherModal = () => {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
   const setRefresh = useSetRecoilState(teacherTableNeedsRefresh)
+  const animatedComponents = makeAnimated()
   const { register, handleSubmit, formState, reset, control, setFocus } = useForm<TeacherFormProps>(
     {
       defaultValues: {
@@ -71,11 +73,9 @@ const CreateTeacherModal = () => {
     }
   }
 
-  const promiseOptions = async () => {
-    console.log('hey! i am getting options wait.')
+  const promiseOptions = async (inputText: string) => {
     const options = await getClassSelectOptions()
-    console.log('these are the options i got: ', options)
-    return options
+    return options.filter((option) => option.label?.includes(inputText))
   }
 
   return (
@@ -117,7 +117,7 @@ const CreateTeacherModal = () => {
               <Controller<TeacherFormProps>
                 name="classes"
                 control={control}
-                render={({ field: { onChange, onBlur, ref, name, value }, fieldState }) => (
+                render={({ field: { onChange, onBlur, ref, name, value } }) => (
                   <FormControl mt={4}>
                     <FormLabel>Assigned Classes</FormLabel>
                     <AsyncSelect
@@ -126,9 +126,10 @@ const CreateTeacherModal = () => {
                       onBlur={onBlur}
                       name={name}
                       value={value}
+                      components={animatedComponents}
                       onChange={
                         onChange as unknown as (
-                          newValue: MultiValue<unknown>,
+                          newValue: unknown,
                           actionMeta: ActionMeta<unknown>
                         ) => void
                       }
