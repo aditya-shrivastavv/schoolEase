@@ -7,7 +7,7 @@ export type EditTeacherModalProps = {
 
 const defaultModalState: EditTeacherModalProps = {
   open: false,
-  teacherData: { id: -0, name: '', email: '', classes: [{ label: '', value: '', color: '' }] },
+  teacherData: { id: '', name: '', email: '', classes: [{ label: '', value: '', color: '' }] },
 }
 
 export const editTeacherModalAtom = atom<EditTeacherModalProps>({
