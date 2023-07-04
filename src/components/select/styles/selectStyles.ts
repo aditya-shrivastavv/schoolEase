@@ -30,6 +30,7 @@ const selectStyles: StylesConfig<ClassSelectData, true, GroupBase<ClassSelectDat
   multiValue: (styles, { data }) => ({
     ...styles,
     backgroundColor: data.color,
+    minWidth: 'fit-content',
   }),
   multiValueRemove: (styles, { data }) => ({
     ...styles,

@@ -18,12 +18,16 @@ import {
 import { useEffect, useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
-import Select, { ActionMeta, MultiValue, StylesConfig } from 'react-select'
+import { ActionMeta, StylesConfig } from 'react-select'
+import AsyncSelect from 'react-select/async'
+import makeAnimated from 'react-select/animated'
 import { classList } from '@/db/sample'
 import selectStyles from '../select/styles/selectStyles'
+import { getClassSelectOptions } from '@/actions/classActions'
 
 const EditTeacherModal = () => {
   const [{ open, teacherData }, setIsOpen] = useRecoilState(editTeacherModalAtom)
+  const animatedComponents = makeAnimated()
   const teacherProps = useMemo(
     () => ({
       firstName: teacherData.name.split(' ')[0],
@@ -46,6 +50,11 @@ const EditTeacherModal = () => {
         resolve(console.log(data))
       }, 2000)
     })
+  }
+
+  const promiseOptions = async (inputText: string) => {
+    const options = await getClassSelectOptions()
+    return options.filter((option) => option.label?.includes(inputText))
   }
 
   return (
@@ -93,20 +102,21 @@ const EditTeacherModal = () => {
                 render={({ field: { onChange, onBlur, ref, name, value }, fieldState }) => (
                   <FormControl mt={4}>
                     <FormLabel>Assigned Classes</FormLabel>
-                    <Select
+                    <AsyncSelect
                       isMulti
                       ref={ref}
                       onBlur={onBlur}
                       name={name}
                       value={value}
+                      components={animatedComponents}
                       onChange={
                         onChange as unknown as (
-                          newValue: MultiValue<unknown>,
+                          newValue: unknown,
                           actionMeta: ActionMeta<unknown>
                         ) => void
                       }
                       closeMenuOnSelect={false}
-                      options={classList}
+                      loadOptions={promiseOptions}
                       styles={selectStyles as StylesConfig}
                     />
                   </FormControl>
