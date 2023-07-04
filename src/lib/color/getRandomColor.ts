@@ -2,11 +2,11 @@ import ColorHash from 'color-hash'
 
 /**
  * Returns a random color in Hex Code format.
- * Lightness: 0.7
+ * Lightness: 0.8
  * @returns {string} Hex Code
  */
 export default function getRandomColor(): string {
-  const colorHash = new ColorHash({ lightness: 0.7 })
+  const colorHash = new ColorHash({ lightness: 0.8 })
   const randomString = Math.random()
     .toString(36)
     .substring(2, Math.floor(Math.random() * 7) + 2)

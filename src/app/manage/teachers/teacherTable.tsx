@@ -2,11 +2,12 @@
 
 import { getAllTeachers } from '@/actions/teacherActions'
 import { editTeacherModalAtom } from '@/atom/editTeacherState'
+import { teacherTableNeedsRefresh } from '@/atom/refresh/teacherTableNeedsRefresh'
 import { warningToast } from '@/components/toast/toast'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Button, Tag, TagLabel, useToast } from '@chakra-ui/react'
-import { ThemeProvider } from '@mui/material'
+import { LinearProgress, ThemeProvider } from '@mui/material'
 import {
   DataGrid,
   GridColDef,
@@ -18,20 +19,24 @@ import {
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 let selectedRows: TeacherFormData[] = []
 
 export default function TeacherTable() {
   const [rows, setRows] = useState<TeacherFormData[]>([])
+  const [loading, setLoading] = useState(true)
+  const refresh = useRecoilValue(teacherTableNeedsRefresh)
 
   useEffect(() => {
     const getRows = async () => {
+      setLoading(true)
       const data = await getAllTeachers()
       setRows(data)
+      setLoading(false)
     }
     getRows()
-  }, [])
+  }, [refresh])
 
   const columns: GridColDef[] = [
     {
@@ -73,7 +78,9 @@ export default function TeacherTable() {
           pageSizeOptions={[10, 25, 50, 100]}
           slots={{
             toolbar: CustomToolbar,
+            loadingOverlay: LinearProgress,
           }}
+          loading={!rows.length && loading}
         />
       </ThemeProvider>
     </div>

@@ -38,3 +38,12 @@ export async function deleteClass(data: ClassInfo[]) {
   const res = await xata.db.classes.delete(ids)
   return res.map((record) => record?.id)
 }
+
+export async function getClassSelectOptions() {
+  const records = await xata.db.classes.getAll()
+  return records.map((record) => ({
+    value: record.name,
+    label: record.name,
+    color: record.colorCode,
+  }))
+}

@@ -17,13 +17,16 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { Controller, useForm } from 'react-hook-form'
-import { useRecoilState } from 'recoil'
-import Select, { ActionMeta, MultiValue, StylesConfig } from 'react-select'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { ActionMeta, MultiValue, StylesConfig } from 'react-select'
+import AsyncSelect from 'react-select/async'
 import { classList } from '@/db/sample'
 import { errorToast, successToast } from '../toast/toast'
 import { useEffect } from 'react'
 import selectStyles from '../select/styles/selectStyles'
 import { createTeacher } from '@/actions/teacherActions'
+import { getClassSelectOptions } from '@/actions/classActions'
+import { teacherTableNeedsRefresh } from '@/atom/refresh/teacherTableNeedsRefresh'
 
 /**
  * Modal for creating/adding a new teacher
@@ -32,15 +35,17 @@ import { createTeacher } from '@/actions/teacherActions'
 const CreateTeacherModal = () => {
   const toast = useToast()
   const [{ open }, setIsOpen] = useRecoilState(createTeacherModalAtom)
-  const { register, handleSubmit, formState, reset, control, setFocus, setError } =
-    useForm<TeacherFormProps>({
+  const setRefresh = useSetRecoilState(teacherTableNeedsRefresh)
+  const { register, handleSubmit, formState, reset, control, setFocus } = useForm<TeacherFormProps>(
+    {
       defaultValues: {
         firstName: '',
         lastName: '',
         email: '',
         classes: undefined,
       },
-    })
+    }
+  )
 
   useEffect(() => {
     if (open) {
@@ -53,8 +58,10 @@ const CreateTeacherModal = () => {
 
   async function onSubmit(data: TeacherFormProps) {
     try {
+      console.log(data)
       const status = await createTeacher(data)
       if (status) {
+        setRefresh((prev) => ({ ...prev, count: prev.count + 1 }))
         successToast(toast, 'Teacher added successfully')
         reset()
       }
@@ -62,6 +69,13 @@ const CreateTeacherModal = () => {
       errorToast(toast, 'Error adding teacher')
       console.error(err)
     }
+  }
+
+  const promiseOptions = async () => {
+    console.log('hey! i am getting options wait.')
+    const options = await getClassSelectOptions()
+    console.log('these are the options i got: ', options)
+    return options
   }
 
   return (
@@ -106,7 +120,7 @@ const CreateTeacherModal = () => {
                 render={({ field: { onChange, onBlur, ref, name, value }, fieldState }) => (
                   <FormControl mt={4}>
                     <FormLabel>Assigned Classes</FormLabel>
-                    <Select
+                    <AsyncSelect
                       isMulti
                       ref={ref}
                       onBlur={onBlur}
@@ -119,7 +133,7 @@ const CreateTeacherModal = () => {
                         ) => void
                       }
                       closeMenuOnSelect={false}
-                      options={classList}
+                      loadOptions={promiseOptions}
                       styles={selectStyles as StylesConfig}
                     />
                   </FormControl>

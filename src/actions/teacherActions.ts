@@ -9,7 +9,7 @@ export async function createTeacher(data: TeacherFormProps) {
     id: data.id,
     name: data.lastName ? `${data.firstName} ${data.lastName}` : data.firstName,
     email: data.email,
-    classes: data.classes ? data.classes.map((record) => record.value) : [],
+    classes: data.classes ? data.classes.map((record) => record.label) : [],
   }
   const record = await xata.db.teachers.create(model)
   return record.id
