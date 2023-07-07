@@ -36,3 +36,20 @@ export async function getAllTeachers() {
       : [],
   }))
 }
+
+export async function updateTeacher(data: TeacherFormProps) {
+  const model: Omit<TeacherFormData, 'classes'> & { classes: string[] } = {
+    id: data.id,
+    name: data.lastName ? `${data.firstName} ${data.lastName}` : data.firstName,
+    email: data.email,
+    classes: data.classes ? data.classes.map((record) => record.label) : [],
+  }
+  const record = await xata.db.teachers.createOrReplace(model)
+  return record.id
+}
+
+export async function deleteTeacher(data: TeacherFormData[]) {
+  const ids = data.map((record) => record.id)
+  const res = await xata.db.teachers.delete(ids)
+  return res.map((record) => record?.id)
+}

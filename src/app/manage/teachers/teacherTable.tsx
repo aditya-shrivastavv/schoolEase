@@ -3,7 +3,7 @@
 import { getAllTeachers } from '@/actions/teacherActions'
 import { editTeacherModalAtom } from '@/atom/editTeacherState'
 import { teacherTableNeedsRefresh } from '@/atom/refresh/teacherTableNeedsRefresh'
-import { warningToast } from '@/components/toast/toast'
+import { errorToast, successToast, warningToast } from '@/components/toast/toast'
 import { MuiTheme } from '@/theme/mui'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Button, Link, Tag, TagLabel, useToast } from '@chakra-ui/react'
@@ -21,6 +21,7 @@ import {
 } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { deleteTeacher as deleteTeacherDb } from '@/actions/teacherActions'
 
 let selectedRows: TeacherFormData[] = []
 
@@ -97,7 +98,10 @@ export default function TeacherTable() {
 
 function CustomToolbar() {
   const toast = useToast()
+  const [deletingTeacher, setDeletingTeacher] = useState(false)
+  const setRefresh = useSetRecoilState(teacherTableNeedsRefresh)
   const handleTeacherEditModal = useSetRecoilState(editTeacherModalAtom)
+
   function handleEditModal() {
     if (selectedRows.length !== 1) {
       warningToast(toast, 'You can only edit one teacher at a time.')
@@ -107,6 +111,18 @@ function CustomToolbar() {
         teacherData: selectedRows[0],
       })
     }
+  }
+
+  async function deleteTeacher() {
+    if (!selectedRows.length) {
+      errorToast(toast, 'Please select at least one teacher to delete.')
+      return
+    }
+    setDeletingTeacher(true)
+    const res = await deleteTeacherDb(selectedRows)
+    setRefresh((prev) => ({ ...prev, count: prev.count + 1 }))
+    setDeletingTeacher(false)
+    successToast(toast, `Successfully deleted ${res.length} teachers.`)
   }
 
   return (
@@ -133,6 +149,8 @@ function CustomToolbar() {
         borderRadius={'md'}
         p={'4px 5px'}
         _hover={{ color: 'red.400', bgColor: 'red.50' }}
+        onClick={deleteTeacher}
+        isLoading={deletingTeacher}
       >
         DELETE
       </Button>

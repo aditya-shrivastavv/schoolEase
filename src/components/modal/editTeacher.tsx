@@ -14,19 +14,24 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from '@chakra-ui/react'
 import { useEffect, useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { ActionMeta, StylesConfig } from 'react-select'
 import AsyncSelect from 'react-select/async'
 import makeAnimated from 'react-select/animated'
-import { classList } from '@/db/sample'
 import selectStyles from '../select/styles/selectStyles'
 import { getClassSelectOptions } from '@/actions/classActions'
+import { errorToast, successToast } from '../toast/toast'
+import { updateTeacher } from '@/actions/teacherActions'
+import { teacherTableNeedsRefresh } from '@/atom/refresh/teacherTableNeedsRefresh'
 
 const EditTeacherModal = () => {
+  const toast = useToast()
   const [{ open, teacherData }, setIsOpen] = useRecoilState(editTeacherModalAtom)
+  const setRefresh = useSetRecoilState(teacherTableNeedsRefresh)
   const animatedComponents = makeAnimated()
   const teacherProps = useMemo(
     () => ({
@@ -40,16 +45,23 @@ const EditTeacherModal = () => {
   const { register, handleSubmit, reset, formState, control } = useForm<TeacherFormProps>({
     defaultValues: useMemo(() => teacherProps, [teacherProps]),
   })
+
   useEffect(() => {
     reset(teacherProps)
   }, [reset, teacherProps])
 
-  function onSubmit(data: any) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(console.log(data))
-      }, 2000)
-    })
+  async function onSubmit(data: TeacherFormProps) {
+    try {
+      const status = await updateTeacher(data)
+      if (status) {
+        setRefresh((prev) => ({ ...prev, count: prev.count + 1 }))
+        successToast(toast, 'Teacher updated successfully')
+        reset()
+      }
+    } catch (err) {
+      errorToast(toast, 'Error updating teacher')
+      console.log(err)
+    }
   }
 
   const promiseOptions = async (inputText: string) => {
