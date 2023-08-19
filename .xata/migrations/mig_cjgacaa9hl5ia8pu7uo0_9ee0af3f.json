@@ -1,0 +1,16 @@
+{
+  "id": "mig_cjgacaa9hl5ia8pu7uo0",
+  "parentID": "mig_cjgabv29hl5ia8pu7un0",
+  "checksum": "1:9ee0af3fb78672f0dd16f6d1e5d0b6be5572b2ec9d3832245f8a01689307c396",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "marks",
+          "type": "float"
+        },
+        "table": "marks"
+      }
+    }
+  ]
+}

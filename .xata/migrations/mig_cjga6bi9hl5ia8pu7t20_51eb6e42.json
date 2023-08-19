@@ -1,0 +1,14 @@
+{
+  "id": "mig_cjga6bi9hl5ia8pu7t20",
+  "parentID": "mig_cjga53g4hpeup3irup8g",
+  "checksum": "1:51eb6e42192db6f196a25de3b353765186cc7b1583d494b285a0848d2bfba7e6",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "representativeColor",
+        "oldName": "colorCode",
+        "table": "classes"
+      }
+    }
+  ]
+}

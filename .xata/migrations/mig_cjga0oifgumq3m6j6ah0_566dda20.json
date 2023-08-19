@@ -1,0 +1,12 @@
+{
+  "id": "mig_cjga0oifgumq3m6j6ah0",
+  "parentID": "mig_cjga0mifgumq3m6j6afg",
+  "checksum": "1:566dda2041e298acf03bcc0f2c826faaa562c9f33d1a9d1fa8fc1174ca71f7d3",
+  "operations": [
+    {
+      "addTable": {
+        "table": "exams"
+      }
+    }
+  ]
+}

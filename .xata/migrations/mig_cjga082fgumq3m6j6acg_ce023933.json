@@ -1,0 +1,13 @@
+{
+  "id": "mig_cjga082fgumq3m6j6acg",
+  "parentID": "mig_cjga06afgumq3m6j6abg",
+  "checksum": "1:ce023933804e66fe2433b2435d4751ad169c0e0de90d1bf632c85c96aaaee3bc",
+  "operations": [
+    {
+      "renameTable": {
+        "newName": "teachers",
+        "oldName": "teacher"
+      }
+    }
+  ]
+}

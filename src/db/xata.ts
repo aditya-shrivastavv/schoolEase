@@ -11,22 +11,69 @@ const tables = [
     name: "teachers",
     columns: [
       { name: "name", type: "string", notNull: true, defaultValue: "N/A" },
-      {
-        name: "email",
-        type: "email",
-        notNull: true,
-        defaultValue: "someone@example.com",
-      },
-      { name: "classes", type: "multiple" },
+      { name: "teachingClasses", type: "link", link: { table: "classes" } },
     ],
+    revLinks: [{ column: "associatedTeachers", table: "classes" }],
   },
   {
     name: "classes",
     columns: [
       { name: "name", type: "string", unique: true },
       { name: "section", type: "string" },
-      { name: "colorCode", type: "string" },
-      { name: "class", type: "string" },
+      { name: "representativeColor", type: "string" },
+      { name: "associatedTeachers", type: "link", link: { table: "teachers" } },
+      { name: "subjectsTaught", type: "link", link: { table: "subjects" } },
+      { name: "students", type: "link", link: { table: "students" } },
+      { name: "exams", type: "link", link: { table: "exams" } },
+    ],
+    revLinks: [
+      { column: "teachingClasses", table: "teachers" },
+      { column: "class", table: "students" },
+    ],
+  },
+  {
+    name: "students",
+    columns: [
+      { name: "name", type: "string" },
+      { name: "rollno", type: "string" },
+      { name: "class", type: "link", link: { table: "classes" } },
+      { name: "marks", type: "link", link: { table: "marks" } },
+    ],
+    revLinks: [{ column: "students", table: "classes" }],
+  },
+  {
+    name: "users",
+    columns: [
+      { name: "email", type: "email", unique: true },
+      { name: "password", type: "string" },
+      { name: "type", type: "string" },
+      { name: "name", type: "string" },
+      { name: "associatedTo", type: "string" },
+    ],
+  },
+  {
+    name: "exams",
+    columns: [{ name: "name", type: "string" }],
+    revLinks: [
+      { column: "exams", table: "classes" },
+      { column: "exam", table: "marks" },
+    ],
+  },
+  {
+    name: "marks",
+    columns: [
+      { name: "exam", type: "link", link: { table: "exams" } },
+      { name: "subject", type: "link", link: { table: "subjects" } },
+      { name: "marks", type: "float" },
+    ],
+    revLinks: [{ column: "marks", table: "students" }],
+  },
+  {
+    name: "subjects",
+    columns: [{ name: "name", type: "string" }],
+    revLinks: [
+      { column: "subjectsTaught", table: "classes" },
+      { column: "subject", table: "marks" },
     ],
   },
 ] as const;
@@ -40,9 +87,29 @@ export type TeachersRecord = Teachers & XataRecord;
 export type Classes = InferredTypes["classes"];
 export type ClassesRecord = Classes & XataRecord;
 
+export type Students = InferredTypes["students"];
+export type StudentsRecord = Students & XataRecord;
+
+export type Users = InferredTypes["users"];
+export type UsersRecord = Users & XataRecord;
+
+export type Exams = InferredTypes["exams"];
+export type ExamsRecord = Exams & XataRecord;
+
+export type Marks = InferredTypes["marks"];
+export type MarksRecord = Marks & XataRecord;
+
+export type Subjects = InferredTypes["subjects"];
+export type SubjectsRecord = Subjects & XataRecord;
+
 export type DatabaseSchema = {
   teachers: TeachersRecord;
   classes: ClassesRecord;
+  students: StudentsRecord;
+  users: UsersRecord;
+  exams: ExamsRecord;
+  marks: MarksRecord;
+  subjects: SubjectsRecord;
 };
 
 const DatabaseClient = buildClient();

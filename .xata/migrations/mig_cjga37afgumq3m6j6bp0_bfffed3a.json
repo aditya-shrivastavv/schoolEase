@@ -1,0 +1,13 @@
+{
+  "id": "mig_cjga37afgumq3m6j6bp0",
+  "parentID": "mig_cjga35qfgumq3m6j6bo0",
+  "checksum": "1:bfffed3ac57d2dd7066982d8b36e8832e7da4eb9dc93d2ab59caeb34f307c653",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "type",
+        "table": "marks"
+      }
+    }
+  ]
+}

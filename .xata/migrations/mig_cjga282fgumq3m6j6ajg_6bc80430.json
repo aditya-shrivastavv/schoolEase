@@ -1,0 +1,16 @@
+{
+  "id": "mig_cjga282fgumq3m6j6ajg",
+  "parentID": "mig_cjga2229hl5ia8pu7sdg",
+  "checksum": "1:6bc804305075dd15a2c5956506e3cb1b8c0ad2835c83588b736a4bda46fd8775",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "type",
+          "type": "string"
+        },
+        "table": "marks"
+      }
+    }
+  ]
+}

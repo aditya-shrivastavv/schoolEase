@@ -1,0 +1,19 @@
+{
+  "id": "mig_cjgabv29hl5ia8pu7un0",
+  "parentID": "mig_cjgabqa9hl5ia8pu7um0",
+  "checksum": "1:27b7b9b8af291d0656fc28587fce7c36ceea318406a36bd04f630afe7ff36688",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "subject",
+          "type": "link",
+          "link": {
+            "table": "subjects"
+          }
+        },
+        "table": "marks"
+      }
+    }
+  ]
+}

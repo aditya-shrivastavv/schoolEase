@@ -1,0 +1,16 @@
+{
+  "id": "mig_cjga9d29hl5ia8pu7tcg",
+  "parentID": "mig_cjga98q9hl5ia8pu7t80",
+  "checksum": "1:bb8881a47751d6ad43aba5c19660142096cd9b7cefb855da31a185daa64990c9",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "rollno",
+          "type": "string"
+        },
+        "table": "students"
+      }
+    }
+  ]
+}

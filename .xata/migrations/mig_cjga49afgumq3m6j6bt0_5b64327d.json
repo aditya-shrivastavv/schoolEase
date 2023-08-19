@@ -1,0 +1,13 @@
+{
+  "id": "mig_cjga49afgumq3m6j6bt0",
+  "parentID": "mig_cjga43qfgumq3m6j6bs0",
+  "checksum": "1:5b64327d6b232f2f23f0e36310ab3e6acdf30c0ad6c0a848eb0d3ae508d4002d",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "classes",
+        "table": "teachers"
+      }
+    }
+  ]
+}

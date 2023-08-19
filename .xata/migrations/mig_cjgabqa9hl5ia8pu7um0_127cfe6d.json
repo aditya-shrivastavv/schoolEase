@@ -1,0 +1,19 @@
+{
+  "id": "mig_cjgabqa9hl5ia8pu7um0",
+  "parentID": "mig_cjgabli9hl5ia8pu7ul0",
+  "checksum": "1:127cfe6d351d3844ba33f992c4fd74af5055ecd94855b6824efe7f0b3597bfc2",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "marks",
+          "type": "link",
+          "link": {
+            "table": "marks"
+          }
+        },
+        "table": "students"
+      }
+    }
+  ]
+}

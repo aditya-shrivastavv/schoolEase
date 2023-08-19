@@ -1,0 +1,13 @@
+{
+  "id": "mig_cjga2qifgumq3m6j6b4g",
+  "parentID": "mig_cjga2na9hl5ia8pu7shg",
+  "checksum": "1:32467ad5c91cbbcf32d4edfa4fec8b79c64931ec8045da1960abdd34e882850c",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "email",
+        "table": "marks"
+      }
+    }
+  ]
+}

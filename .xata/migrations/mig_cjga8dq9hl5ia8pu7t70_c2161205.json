@@ -1,0 +1,19 @@
+{
+  "id": "mig_cjga8dq9hl5ia8pu7t70",
+  "parentID": "mig_cjga7sq9hl5ia8pu7t60",
+  "checksum": "1:c2161205ca993a20c239c29feac6628936224a94a984ff7a9239e656806d68cc",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "teachingClasses",
+          "type": "link",
+          "link": {
+            "table": "classes"
+          }
+        },
+        "table": "teachers"
+      }
+    }
+  ]
+}

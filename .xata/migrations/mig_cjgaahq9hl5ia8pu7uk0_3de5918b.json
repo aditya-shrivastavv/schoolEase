@@ -1,0 +1,16 @@
+{
+  "id": "mig_cjgaahq9hl5ia8pu7uk0",
+  "parentID": "mig_cjgaa029hl5ia8pu7ufg",
+  "checksum": "1:3de5918b258a1bf5f467115769933b7ab8ec406e1a74e257cc176892a830f500",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "exams"
+      }
+    }
+  ]
+}

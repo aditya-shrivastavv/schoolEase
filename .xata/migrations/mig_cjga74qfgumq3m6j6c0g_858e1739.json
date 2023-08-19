@@ -1,0 +1,19 @@
+{
+  "id": "mig_cjga74qfgumq3m6j6c0g",
+  "parentID": "mig_cjga6pa9hl5ia8pu7t40",
+  "checksum": "1:858e17396a772ac4eecb2605f4bf82a97ad298cca0ee2868fe5900c8821b3d41",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "subjectsTaught",
+          "type": "link",
+          "link": {
+            "table": "subjects"
+          }
+        },
+        "table": "classes"
+      }
+    }
+  ]
+}

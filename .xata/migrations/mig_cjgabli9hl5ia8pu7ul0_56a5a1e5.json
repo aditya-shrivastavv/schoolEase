@@ -1,0 +1,19 @@
+{
+  "id": "mig_cjgabli9hl5ia8pu7ul0",
+  "parentID": "mig_cjgaahq9hl5ia8pu7uk0",
+  "checksum": "1:56a5a1e572416cbc4149d98ba6169564fa9bec5456e256f30d20ada02ef09296",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "exam",
+          "type": "link",
+          "link": {
+            "table": "exams"
+          }
+        },
+        "table": "marks"
+      }
+    }
+  ]
+}
