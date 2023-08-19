@@ -36,7 +36,7 @@ const page = ({ params }: Props) => {
             Class details
           </Heading>
           <TableContainer>
-            <Table variant={'unstyled'} size={'sm'}>
+            <Table variant={'striped'} size={'sm'}>
               <Thead>
                 <Tr>
                   <Th w={'35%'}></Th>

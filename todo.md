@@ -3,3 +3,4 @@
 - [x] learn and apply useMemo
 - [ ] add a confirmation popup on adding or deletion of some important information.
 - [x] async select is not sorting options based on the given text.
+- [ ] data once fetched from the db should be cached using recoil (do it responsibly)

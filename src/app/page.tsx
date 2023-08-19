@@ -15,7 +15,7 @@ export default function Root() {
           style={{ position: 'absolute', bottom: 10, left: 0, rotate: '5deg', scale: 1.5 }}
         />
         <Image
-          alt="curve"
+          alt="curve" 
           src={'/curves/wave-up.svg'}
           width={550}
           height={500}
